@@ -1,0 +1,910 @@
+/* ============================================================================
+   global.css — primera versión visual navegable (Desktop únicamente).
+
+   Filosofía: nada de esto es la identidad definitiva de CREA. Es una
+   materialización neutra, deliberadamente sin marca, para validar jerarquía
+   visual, recorrido de la mirada, equilibrio y claridad antes de vestirlo.
+
+   Reglas que se siguieron en todo el archivo:
+   - La información se organiza con tipografía, alineación, espaciado y
+     contraste. Nunca con recuadros: no hay una sola caja con fondo y borde
+     alrededor de un bloque de contenido, salvo el buscador flotante (un
+     popover realmente SÍ necesita separarse del plano de la página).
+   - Jerarquía de tamaño tipográfico, de mayor a menor peso: consulta (38px)
+     > respuesta abierta (17px) > cuerpo general (15px) > contexto (13px) >
+     metadatos / valores exactos (12px) > historial (11px).
+   - Un solo color de acento, usado con moderación, nunca como fondo sólido
+     salvo en el hover de un botón flotante genuino (el buscador).
+   ============================================================================ */
+
+:root {
+  --texto: #1a1a18;
+  --texto-suave: #6e6e68;
+  --texto-tenue: #a3a39c;
+  --linea: #ececE6;
+  --linea-fuerte: #d8d8d0;
+  --superficie: #ffffff;
+  --acento: #2f5233;
+  --acento-tenue: #c7d6c9;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  margin: 0;
+  background: var(--superficie);
+  color: var(--texto);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------------------------
+   Encabezado: lo más discreto de toda la pantalla. Existe para orientar y
+   para alojar el historial, no para llamar la atención.
+   --------------------------------------------------------------------------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 40px;
+  max-width: 1330px;
+  margin: 0 auto;
+}
+.marca {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--texto-tenue);
+  font-weight: 600;
+}
+.nombre-producto {
+  font-size: 12px;
+  color: var(--texto-tenue);
+}
+.historial-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+}
+.historial-btn {
+  border: none;
+  background: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--texto-tenue);
+  font-size: 13px;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.historial-btn:not(:disabled):hover { background: #f4f4f0; color: var(--texto); }
+.historial-btn:disabled { opacity: 0.35; cursor: default; }
+
+/* ---------------------------------------------------------------------------
+   Lienzo principal
+
+   Ancho ajustado para que la pantalla completa (gráfico + panel de
+   indicadores) entre sin scroll horizontal a 100% de zoom en un monitor
+   Full HD (1920×1080) y también en resoluciones habituales de notebook
+   (1366×768 en adelante, descontando el scrollbar vertical del sistema).
+   El ancho del GRÁFICO en sí (992px) y la tipografía no se tocaron -- el
+   ajuste se hizo achicando el padding lateral de la página (64px -> 40px)
+   y el espacio entre el gráfico y el panel de indicadores (56px -> 28px,
+   panel 260px -> 220px). 992 + 28 + 220 + 80(padding) = 1320px de ancho
+   real máximo, con margen bajo el umbral seguro de ~1349px.
+   --------------------------------------------------------------------------- */
+.lienzo {
+  max-width: 1330px;
+  margin: 0 auto;
+  padding: 48px 40px 120px;
+}
+
+/* ---------------------------------------------------------------------------
+   CONSULTA — el elemento de mayor jerarquía de la pantalla.
+   --------------------------------------------------------------------------- */
+.bloque-consulta {
+  margin-bottom: 56px;
+  max-width: 880px;
+}
+.consulta-oracion {
+  font-size: 38px;
+  line-height: 1.42;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  margin: 0 0 22px;
+  color: var(--texto);
+}
+.clausula-pill {
+  display: inline;
+  background: none;
+  border: none;
+  border-bottom: 1.5px solid var(--acento-tenue);
+  color: var(--acento);
+  font: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  padding: 0 1px;
+  cursor: pointer;
+  transition: border-color 0.12s ease;
+}
+.clausula-pill:hover { border-bottom-color: var(--acento); }
+
+.agregar-condicion {
+  border: none;
+  background: none;
+  color: var(--texto-tenue);
+  font-size: 15px;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  border-bottom: 1px dotted var(--linea-fuerte);
+}
+.agregar-condicion:hover { color: var(--texto-suave); border-bottom-color: var(--texto-tenue); }
+
+/* ---------------------------------------------------------------------------
+   CONTEXTO — acompaña a la consulta sin competir con ella: mucho más chico,
+   mucho más suave, pegado inmediatamente debajo.
+   --------------------------------------------------------------------------- */
+.fila-contexto {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+}
+.contexto {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+.contexto-representatividad {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  border-bottom: 1px dotted transparent;
+}
+.contexto-representatividad:hover { border-bottom-color: var(--texto-tenue); }
+.rep-punto { font-size: 8px; vertical-align: middle; }
+.rep-alta { color: #3f7a4a; }
+.rep-media { color: #a97a1f; }
+.rep-baja, .rep-insuficiente { color: #b5493a; }
+
+.link-discreto {
+  border: none;
+  background: none;
+  font-size: 12px;
+  color: var(--texto-tenue);
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  margin-left: auto;
+}
+.link-discreto:hover { color: var(--texto-suave); }
+.link-discreto.activo { color: var(--acento); }
+
+.contexto-detalle {
+  font-size: 12px;
+  color: var(--texto-tenue);
+  margin: 8px 0 0;
+  display: none;
+  max-width: 620px;
+}
+.contexto-detalle.abierto { display: block; }
+
+/* ---------------------------------------------------------------------------
+   COMPARACIÓN — discreta hasta que se usa: sin caja, solo una regla fina
+   arriba y jerarquía tipográfica para distinguir referencia de actual.
+   --------------------------------------------------------------------------- */
+.bloque-comparacion {
+  display: none;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--linea);
+}
+.bloque-comparacion.visible { display: block; }
+.comparacion-fila { margin-bottom: 18px; }
+.comparacion-etiqueta {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--texto-tenue);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.comparacion-oracion { font-size: 17px; line-height: 1.5; color: var(--texto); }
+.comparacion-diferencias { margin-top: 18px; font-size: 13px; }
+.dif-item { margin-bottom: 6px; }
+.dif-agregada { color: var(--acento); }
+.dif-quitada { color: #b5493a; text-decoration: line-through; text-decoration-color: #d8b3ac; }
+.dif-modificada { color: #a97a1f; }
+
+/* ---------------------------------------------------------------------------
+   GRÁFICO — el verdadero protagonista. Sin caja, sin borde, sin sombra.
+   Máximo espacio posible, aire generoso arriba y abajo para que nada le
+   reste peso visual. El ancho del bloque queda fijo en 992px (el mismo de
+   siempre) mediante flex-basis, para que agregar el panel de indicadores al
+   lado no lo modifique ni un píxel.
+   --------------------------------------------------------------------------- */
+.fila-grafico {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  margin: 0 0 8px;
+}
+.bloque-grafico {
+  flex: 0 0 992px;
+  min-width: 0;
+}
+#grafico-principal { width: 100%; height: 440px; } /* antes 500px -- incluía la banda de frecuencia, ahora es un gráfico aparte */
+#histograma-principal { width: 100%; height: 130px; }
+
+.seleccion-afordancia {
+  display: none;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--texto-suave);
+  padding: 10px 2px 0;
+  border-top: 1px solid var(--linea);
+  margin-top: 8px;
+}
+.seleccion-afordancia.visible { display: flex; }
+.seleccion-boton {
+  border: none;
+  background: none;
+  color: var(--acento);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  border-bottom: 1px solid var(--acento-tenue);
+}
+.seleccion-boton:hover { border-bottom-color: var(--acento); }
+
+/* ---------------------------------------------------------------------------
+   PANEL DE INDICADORES — usa el espacio lateral liberado por el ancho fijo
+   del gráfico. Dos bloques puramente tipográficos (nada de velocímetros ni
+   cajas): un número grande es, de por sí, el elemento más fácil de leer en
+   un segundo que existe -- agregarle un widget gráfico encima no lo haría
+   más claro, solo más pesado. Se distinguen entre sí únicamente por una
+   regla superior finísima, no por un recuadro.
+   --------------------------------------------------------------------------- */
+.panel-indicadores {
+  flex: 0 0 220px;
+  padding-top: 4px;
+}
+.indicador {
+  padding-top: 18px;
+  border-top: 1px solid var(--linea);
+  margin-bottom: 40px;
+}
+.indicador-titulo {
+  font-size: 12px;
+  color: var(--texto-suave);
+  margin-bottom: 10px;
+}
+.indicador-valor {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--texto);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+.indicador-ventana {
+  font-size: 14px;
+  color: var(--acento);
+  margin-top: 4px;
+}
+.indicador-subtitulo {
+  font-size: 11px;
+  color: var(--texto-tenue);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+.indicador-vacio {
+  font-size: 12px;
+  color: var(--texto-tenue);
+  font-style: italic;
+}
+.indicadores-nota {
+  font-size: 11px;
+  color: var(--texto-tenue);
+  margin: 0;
+  padding-top: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   RESPUESTA — se siente como una conversación con la información, no como
+   un panel de conclusiones. La pregunta es un gesto tipográfico discreto;
+   la respuesta, cuando se pide, aparece con una regla fina a la izquierda
+   (como una cita) y un leve acento serif que la distingue del resto de la
+   interfaz -- es "otra voz" hablando, no otro dato más en pantalla.
+   --------------------------------------------------------------------------- */
+.bloque-respuesta {
+  margin: 64px 0 40px;
+  max-width: 640px;
+}
+.respuesta-toggle {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 15px;
+  color: var(--texto-suave);
+  font-family: inherit;
+  cursor: pointer;
+}
+.respuesta-toggle:hover { color: var(--texto); }
+.respuesta-contenido {
+  display: none;
+  margin-top: 18px;
+  padding-left: 18px;
+  border-left: 2px solid var(--acento-tenue);
+}
+.respuesta-contenido.abierto { display: block; }
+.respuesta-contenido p { margin: 0 0 12px; }
+.respuesta-contenido p:last-child { margin-bottom: 0; }
+
+/* El hallazgo central se distingue de los mensajes de apoyo -- no todo el
+   texto tiene el mismo peso informativo, y tratarlo como un bloque uniforme
+   diluye el que más importa. */
+.respuesta-principal {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.55;
+  color: #2c2c28;
+}
+.respuesta-secundaria {
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--texto-suave);
+}
+
+/* ---------------------------------------------------------------------------
+   VALORES EXACTOS — existe, pero permanece completamente secundario: texto
+   diminuto, sin botón, al final de todo.
+   --------------------------------------------------------------------------- */
+.bloque-valores { max-width: 880px; }
+.valores-exactos summary {
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--texto-tenue);
+  list-style: none;
+}
+.valores-exactos summary::-webkit-details-marker { display: none; }
+.valores-exactos summary:hover { color: var(--texto-suave); }
+.valores-exactos summary::before { content: '＋  '; }
+.valores-exactos[open] summary::before { content: '－  '; }
+
+table.tabla-ventanas {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 14px;
+  color: var(--texto-suave);
+}
+table.tabla-ventanas th {
+  text-align: right;
+  font-weight: 500;
+  color: var(--texto-tenue);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--linea-fuerte);
+}
+table.tabla-ventanas td {
+  text-align: right;
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--linea);
+}
+table.tabla-ventanas th:first-child, table.tabla-ventanas td:first-child { text-align: left; }
+
+/* ---------------------------------------------------------------------------
+   BUSCADOR — único elemento con elevación real: es un popover flotante, y
+   un popover que no se distingue del plano de la página deja de leerse
+   como interactivo. Se mantiene liviano: superficie blanca, borde de 1px,
+   sombra suave, nada de color de fondo salvo el ítem activo.
+   --------------------------------------------------------------------------- */
+.buscador-overlay {
+  z-index: 1000;
+  width: 300px;
+  background: var(--superficie);
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(20, 20, 15, 0.09);
+  padding: 6px;
+}
+.buscador-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--linea);
+  padding: 10px 8px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  color: var(--texto);
+}
+.buscador-lista {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+.buscador-item {
+  padding: 8px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--texto);
+}
+.buscador-item.activo { background: #f2f5f2; color: var(--acento); }
+.buscador-vacio { padding: 10px; font-size: 13px; color: var(--texto-tenue); }
+
+.buscador-rango { display: flex; align-items: center; gap: 8px; padding: 10px 6px; flex-wrap: wrap; }
+.rango-etiqueta { font-size: 12px; color: var(--texto-suave); width: 100%; }
+.rango-input { width: 74px; padding: 5px; border: 1px solid var(--linea-fuerte); border-radius: 5px; font-family: inherit; }
+.rango-confirmar { border: none; background: var(--acento); color: white; border-radius: 5px; padding: 6px 12px; font-size: 12px; cursor: pointer; }
+
+/* ---------------------------------------------------------------------------
+   Pie
+   --------------------------------------------------------------------------- */
+.pie {
+  max-width: 1330px;
+  margin: 0 auto;
+  padding: 20px 40px 40px;
+  font-size: 11px;
+  color: var(--texto-tenue);
+}
+
+/* ============================================================================
+   MÓDULO COMPARAR — extensión de este mismo sistema visual, no un archivo
+   aparte. Mismas variables, misma tipografía, mismo criterio "sin cajas, sin
+   sombras, jerarquía por tipografía". Lo único que agrega es lo que el
+   documento funcional marca como exclusivo de este módulo: paleta
+   categórica (identidad de grupo, nunca orden) y el layout de pills de
+   grupo. Nada de lo de arriba se modificó para llegar a esto.
+   ============================================================================ */
+
+.selector-variable {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-size: 15px;
+  color: var(--texto-suave);
+}
+.selector-variable select {
+  font: inherit;
+  font-size: 15px;
+  color: var(--acento);
+  border: none;
+  border-bottom: 1.5px solid var(--acento-tenue);
+  background: none;
+  padding: 0 1px;
+  cursor: pointer;
+}
+
+.fila-grupos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 32px;
+}
+.grupo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 3px;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--texto);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: border-color 0.12s ease;
+}
+.grupo-pill:hover { border-color: var(--color-grupo, var(--texto-tenue)); }
+.grupo-pill-vacio { color: var(--texto-tenue); font-style: italic; }
+.grupo-punto {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-grupo, var(--texto-tenue));
+}
+.agregar-grupo {
+  border: none;
+  background: none;
+  color: var(--texto-tenue);
+  font-size: 13px;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  border-bottom: 1px dotted var(--linea-fuerte);
+}
+.agregar-grupo:hover { color: var(--texto-suave); border-bottom-color: var(--texto-tenue); }
+
+.leyenda-n-grupos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 12px;
+  color: var(--texto-suave);
+  margin: 0 0 6px;
+}
+.leyenda-nota-vacio {
+  font-size: 11px;
+  color: var(--texto-tenue);
+  font-style: italic;
+}
+
+.indicador-comparacion {
+  font-size: 13px;
+  color: var(--texto);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* ============================================================================
+   MÓDULO ESCENARIOS — extensión de este mismo sistema visual. Reutiliza
+   .consulta-oracion, .clausula-pill, .agregar-condicion, .buscador-* y
+   .indicador* tal cual (nada nuevo abajo para esas piezas). Lo único nuevo
+   es la tarjeta de resumen (Sección 6.1, exclusiva de este módulo) y el
+   mensaje de piso mínimo (Sección 9.2).
+   ============================================================================ */
+
+.indicador-principal-escenario .indicador-valor { font-size: 34px; }
+.escenario-sin-condiciones {
+  font-size: 12px;
+  color: var(--texto-tenue);
+  margin-top: 2px;
+}
+
+.mensaje-metodologico {
+  font-size: 12px;
+  color: var(--texto-tenue);
+  max-width: 620px;
+  margin: 6px 0 0;
+}
+
+.mensaje-piso-minimo {
+  font-size: 13px;
+  color: var(--texto-suave);
+  max-width: 620px;
+  margin: 10px 0 0;
+  padding: 10px 14px;
+  border-left: 2px solid var(--linea-fuerte);
+}
+
+.tarjeta-escenario {
+  margin: 20px 0 28px;
+  padding: 16px 18px;
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+}
+.tarjeta-grilla {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+  gap: 8px 24px;
+}
+.tarjeta-item { font-size: 13px; color: var(--texto); }
+.tarjeta-etiqueta { color: var(--texto-tenue); }
+.tarjeta-valor { color: var(--texto); }
+.tarjeta-pie {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dotted var(--linea);
+  font-size: 12px;
+  color: var(--texto-tenue);
+}
+
+/* Bloque "Lotes registrados que superaron" (Sección 7) -- mismo patrón
+   tipográfico que .indicador (sin cajas, sin gauges), en la misma columna
+   lateral. */
+.bloque-lotes-superados { margin-top: 24px; }
+.lote-superado-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  color: var(--texto);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--linea);
+}
+.lote-superado-fila:last-child { border-bottom: none; }
+.lote-superado-umbral { color: var(--texto-suave); }
+.lote-superado-valor { font-weight: 600; color: var(--texto); }
+.lote-superado-base {
+  font-size: 11px;
+  color: var(--texto-tenue);
+  margin-top: 8px;
+}
+
+/* --- Fila de tarjetas de información (prueba 10 días): indicador principal
+   + "qué muestran los datos" en la misma línea, en vez de bloques separados
+   por varias secciones intermedias --- */
+.fila-info-cards {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  margin: 0 0 24px;
+  flex-wrap: wrap;
+}
+.info-card {
+  flex: 1 1 320px;
+  min-width: 280px;
+  padding: 16px 18px;
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+}
+.info-card .mensaje-metodologico { margin: 0 0 10px; }
+.info-card .respuesta-toggle { margin: 0; }
+
+/* --- Heatmap FS×Ciclo y Ranking (Escenarios v2) --- */
+.bloque-heatmap { margin: 28px 0; }
+.heatmap-titulo { font-size: 16px; font-weight: 600; color: var(--texto); margin: 0 0 4px; }
+.heatmap-aclaracion { font-size: 12px; color: var(--texto-tenue); max-width: 640px; margin: 0 0 14px; }
+.heatmap-controles { margin-bottom: 10px; }
+.heatmap-rango-fecha { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--texto-suave); }
+.heatmap-rango-fecha input[type="range"] { width: 140px; }
+.rango-fecha-etiqueta { margin-left: 8px; font-size: 12px; color: var(--texto-tenue); }
+#grafico-heatmap { min-height: 260px; }
+
+.bloque-ranking { margin: 32px 0; }
+.ranking-titulo { font-size: 16px; font-weight: 600; color: var(--texto); margin: 0 0 2px; }
+.ranking-subtitulo { font-size: 12px; color: var(--texto-tenue); margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+.ranking-pregunta { font-size: 13px; color: var(--texto-suave); margin: 2px 0 14px; }
+.ranking-selector { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 13px; color: var(--texto-suave); }
+.ranking-selector select { font: inherit; font-size: 13px; color: var(--acento); border: none; border-bottom: 1.5px solid var(--acento-tenue); background: none; padding: 0 1px; cursor: pointer; }
+.ranking-mensaje-dinamico { font-size: 12px; color: var(--texto-tenue); margin: 0 0 14px; }
+.ranking-vacio { font-size: 13px; color: var(--texto-tenue); }
+.tabla-ranking { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tabla-ranking th { text-align: left; font-weight: 600; color: var(--texto-tenue); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; padding: 6px 10px; border-bottom: 1px solid var(--linea-fuerte); }
+.tabla-ranking td { padding: 6px 10px; border-bottom: 1px solid var(--linea); }
+.ranking-expandir { margin-top: 10px; border: none; background: none; color: var(--texto-tenue); font-size: 13px; font-family: inherit; padding: 0; cursor: pointer; border-bottom: 1px dotted var(--linea-fuerte); }
+.ranking-expandir:hover { color: var(--texto-suave); border-bottom-color: var(--texto-tenue); }
+.ranking-nota-pocas { font-size: 11px; color: var(--texto-tenue); font-style: italic; margin-top: 8px; }
+
+/* --- Gráfico de dispersión mediana × dispersión relativa (Escenarios v2) --- */
+.bloque-dispersion {
+  margin: 28px auto 0;
+  max-width: 1220px; /* ancho visual acotado -- evita que el gráfico se estire con espacios vacíos en pantallas anchas */
+  width: 100%;
+}
+.dispersion-titulo { font-size: 16px; font-weight: 600; color: var(--texto); margin: 0 0 4px; }
+.dispersion-caption {
+  font-size: 12px;
+  color: var(--texto-suave);
+  max-width: 720px;
+  margin: 0 0 2px;
+  line-height: 1.45;
+}
+.dispersion-caption-secundaria {
+  font-size: 11px;
+  color: var(--texto-tenue);
+  max-width: 720px;
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+#grafico-dispersion {
+  height: 560px; /* margen superior+inferior del layout de Plotly + ~440px de área de trazado real */
+  max-width: 100%;
+}
+
+/* Separación acotada con "Ver valores exactos" cuando sigue inmediatamente
+   al gráfico de dispersión -- selector encadenado a propósito, para no
+   tocar el espaciado general de .bloque-valores (compartido con Explorar y
+   Comparar). */
+.bloque-dispersion + .bloque-valores { margin-top: 36px; }
+
+/* ============================================================================
+   Reorganización visual de Escenarios (jerarquía y velocidad de lectura) --
+   no cambia ningún cálculo ni el mecanismo del constructor, solo la
+   composición y el peso relativo de los bloques.
+   ============================================================================ */
+
+/* Título estable (reemplaza el encabezado dinámico como elemento principal) */
+.escenarios-titulo-bloque { margin: 0 0 18px; }
+.escenarios-titulo-estable {
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--texto);
+  line-height: 1.35;
+  margin: 0 0 6px;
+  max-width: 760px;
+}
+.escenarios-titulo-aclaracion {
+  font-size: 12px;
+  color: var(--texto-tenue);
+  margin: 0;
+  max-width: 680px;
+}
+
+/* Constructor compacto -- ya no es el título de la pantalla, solo el
+   mecanismo para agregar/quitar condiciones. */
+.bloque-consulta-compacta { margin: 0 0 14px; }
+.bloque-consulta-compacta .consulta-oracion { font-size: 14px; color: var(--texto-suave); }
+
+/* Fila que agrupa "Resumen del ambiente" y "Lotes registrados que
+   superaron" -- antes lotes superados quedaba al final de la pantalla.
+   Cada tarjeta ajusta su MARCO al contenido real (no se estira a un ancho
+   fijo ni se angosta el texto adentro): flex-items sin flex-grow ya se
+   dimensionan por su contenido, alcanza con no forzar un ancho. */
+.fila-resumen-y-lotes {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 0 0 22px;
+}
+.fila-resumen-y-lotes .tarjeta-ambiente {
+  flex: 0 1 auto;
+  width: auto;
+  margin: 0;
+}
+.bloque-lotes-superados-compacto .lotes-superados-fila { gap: 20px; }
+
+/* Tarjeta única del ambiente: observaciones históricas comparables +
+   campañas + condiciones activas, en un solo bloque compacto. */
+.tarjeta-ambiente {
+  padding: 14px 18px;
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  margin: 0 0 22px;
+}
+.indicador-compacto .indicador-titulo { font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--texto-tenue); margin: 0 0 2px; }
+.indicador-compacto .indicador-valor { font-size: 24px; font-weight: 600; color: var(--texto); line-height: 1.2; }
+.indicador-compacto .indicador-subtitulo { font-size: 12px; color: var(--texto-suave); margin-top: 1px; }
+.indicador-compacto .escenario-sin-condiciones { font-size: 11px; color: var(--texto-tenue); margin-top: 2px; }
+/* La tarjeta de condiciones, cuando aparece dentro de la tarjeta del
+   ambiente, no necesita su propio marco (ya está dentro de uno) -- se
+   sobreescriben acá los márgenes/bordes que .tarjeta-escenario usa cuando
+   vive suelta. */
+#tarjeta-escenario-contenido .tarjeta-grilla {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dotted var(--linea);
+}
+#tarjeta-escenario-contenido .tarjeta-pie { margin-top: 8px; padding-top: 0; border-top: none; }
+
+/* Indicadores destacados (reemplaza el bloque textual "¿Qué muestran estos
+   datos?" como elemento principal) */
+.bloque-kpis-destacados { margin: 32px 0; }
+.kpis-destacados-titulo { font-size: 16px; font-weight: 600; color: var(--texto); margin: 0 0 12px; }
+.grid-kpis-destacados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+.kpi-destacado { padding: 12px 14px; border: 1px solid var(--linea); border-radius: 4px; }
+.kpi-destacado-titulo { font-size: 11px; color: var(--texto-tenue); text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 6px; }
+.kpi-destacado-valor { font-size: 20px; font-weight: 600; color: var(--texto); line-height: 1.2; }
+.kpi-destacado-detalle { font-size: 12px; color: var(--texto-suave); margin-top: 3px; }
+.kpi-destacado-vacio { font-size: 12px; color: var(--texto-tenue); font-style: italic; }
+
+.aclaraciones-metodologicas { margin-top: 16px; }
+.aclaraciones-metodologicas p {
+  font-size: 11px;
+  color: var(--texto-tenue);
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+
+/* Lotes registrados que superaron -- fila horizontal de 3, en vez de lista vertical */
+.lotes-superados-fila {
+  display: flex;
+  gap: 24px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.lote-superado-item { display: flex; flex-direction: column; }
+.lote-superado-item .lote-superado-umbral { font-size: 12px; color: var(--texto-tenue); }
+.lote-superado-item .lote-superado-valor { font-size: 20px; font-weight: 600; color: var(--texto); }
+
+/* --- Título estable y resúmenes de Comparar --- */
+.comparar-titulo-bloque { margin: 0 0 18px; }
+.comparar-titulo-estable {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--texto);
+  margin: 0 0 6px;
+  line-height: 1.3;
+  max-width: 780px;
+}
+.comparar-contexto-corto, .comparar-comparando-corto {
+  font-size: 13px;
+  color: var(--texto-suave);
+  margin: 0 0 2px;
+}
+
+.bloque-consulta-compacta .selector-variable { margin-top: 8px; }
+
+/* --- Tarjetas de grupo (única referencia visual permanente, Sección 2-3) --- */
+.fila-grupos { display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px; margin: 0 0 22px; }
+.grupo-tarjeta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 30px 10px 14px;
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.12s ease, background-color 0.12s ease, opacity 0.12s ease;
+}
+.grupo-tarjeta:hover, .grupo-tarjeta-resaltada {
+  border-color: var(--color-grupo, var(--texto-tenue));
+  background-color: rgba(0,0,0,0.02);
+}
+.grupo-tarjeta-vacia { color: var(--texto-tenue); font-style: italic; }
+/* Grupo desactivado por clic (Sección 4: clic alterna mostrar/ocultar la
+   serie, ya no quita el grupo -- eso ahora lo hace el botón × aparte) --
+   misma tarjeta, atenuada, para que el estado se lea de un vistazo. */
+.grupo-tarjeta-oculta { opacity: 0.45; }
+.grupo-tarjeta-punto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-grupo, var(--texto-tenue));
+  flex-shrink: 0;
+}
+.grupo-tarjeta-texto { display: flex; flex-direction: column; line-height: 1.3; }
+.grupo-tarjeta-nombre { font-size: 14px; font-weight: 600; color: var(--texto); }
+.grupo-tarjeta-n { font-size: 12px; color: var(--texto-suave); }
+.grupo-tarjeta-quitar {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  border: none;
+  background: none;
+  color: var(--texto-tenue);
+  font-size: 13px;
+  line-height: 1;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+.grupo-tarjeta-quitar:hover { color: var(--texto); }
+
+/* --- Gráfico principal: altura fija (Sección 8) -- ocultar/mostrar las
+   bandas nunca debe cambiar el alto del contenedor ni correr lo que sigue
+   más abajo (KPIs). --- */
+.bloque-grafico { margin: 0 0 8px; }
+#grafico-comparativo { width: 100%; height: 440px; }
+.toggle-bandas {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--texto-suave);
+  cursor: pointer;
+  margin-top: 6px;
+}
+.toggle-bandas input { cursor: pointer; }
+
+/* --- Histograma independiente (Sección 6) -- bloque propio, ya no
+   comparte lienzo de Plotly con el gráfico principal. Altura fija por el
+   mismo motivo que el gráfico de arriba. --- */
+.bloque-histograma { margin: 0 0 24px; }
+.frecuencia-titulo {
+  font-size: 12px;
+  color: var(--texto-suave);
+  margin: 0 0 4px;
+  cursor: help;
+  border-bottom: 1px dotted var(--texto-tenue);
+  display: inline-block;
+}
+#histograma-comparativo { width: 100%; height: 130px; }
+
+/* --- Hover sincronizado ranking <-> dispersión (Escenarios) --- */
+.ranking-fila-resaltada { background-color: rgba(0,0,0,0.035); }

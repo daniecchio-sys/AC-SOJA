@@ -1,0 +1,128 @@
+/* ============================================================================
+   recursos.css
+   Estilos de la página de Recursos (recursos.html). Reutiliza el header,
+   footer y variables institucionales de home.css (misma familia visual que
+   la Home) -- este archivo solo agrega lo específico del contenido
+   editorial: índice, secciones, tabla de glosario.
+   ============================================================================ */
+
+.recursos-main {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: 56px 40px 80px;
+}
+
+.recursos-intro { max-width: 640px; margin: 0 0 40px; }
+.recursos-titulo {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--texto);
+  margin: 0 0 12px;
+}
+.recursos-copete { font-size: 16px; color: var(--texto-secundario); line-height: 1.55; margin: 0; }
+
+/* --- Índice de anclas --- */
+.recursos-indice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  padding: 18px 20px;
+  margin: 0 0 48px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--fondo-secundario);
+}
+.recursos-indice a {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-secundario);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.recursos-indice a:hover { color: var(--crea-dark); border-color: var(--crea-green); }
+
+/* --- Cuerpo del artículo --- */
+.recursos-articulo { max-width: 760px; }
+.recurso-seccion {
+  padding: 40px 0;
+  border-top: 1px solid var(--borde);
+  scroll-margin-top: 24px; /* que el ancla no quede pegada al borde de la ventana */
+}
+.recurso-seccion:first-child { border-top: none; padding-top: 0; }
+
+.recurso-seccion h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--texto);
+  margin: 0 0 14px;
+}
+.recurso-seccion h2 svg { width: 20px; height: 20px; stroke: var(--crea-green); flex-shrink: 0; }
+.recurso-seccion h2 .recurso-glifo-texto { font-size: 16px; font-weight: 700; color: var(--crea-green); width: 20px; flex-shrink: 0; }
+
+.recurso-seccion p {
+  font-size: 15px;
+  color: var(--texto-secundario);
+  line-height: 1.65;
+  margin: 0 0 16px;
+}
+.recurso-seccion p:last-child { margin-bottom: 0; }
+
+/* --- Variables disponibles: 3 grupos en columnas --- */
+.grupos-variables {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 8px 0 20px;
+}
+.grupo-variable h3 { font-size: 14px; font-weight: 600; color: var(--texto); margin: 0 0 10px; }
+.grupo-variable ul { list-style: none; margin: 0; padding: 0; }
+.grupo-variable li {
+  font-size: 13.5px;
+  color: var(--texto-secundario);
+  padding: 6px 0;
+  border-top: 1px solid var(--borde);
+}
+.grupo-variable li:first-child { border-top: none; }
+
+/* --- Glosario --- */
+.glosario-subtitulo { font-size: 15px; font-weight: 600; color: var(--texto); margin: 24px 0 12px; }
+.tabla-glosario {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+.tabla-glosario th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--texto-secundario);
+  padding: 0 16px 10px 0;
+  border-bottom: 1px solid var(--borde);
+}
+.tabla-glosario td {
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto-secundario);
+  line-height: 1.5;
+  vertical-align: top;
+}
+.tabla-glosario td:first-child {
+  color: var(--texto);
+  font-weight: 600;
+  white-space: nowrap;
+  width: 1%;
+}
+
+@media (max-width: 720px) {
+  .recursos-main { padding: 40px 20px 60px; }
+  .recursos-titulo { font-size: 28px; }
+  .grupos-variables { grid-template-columns: 1fr; gap: 20px; }
+  .tabla-glosario td:first-child { white-space: normal; width: auto; }
+}

@@ -1,0 +1,401 @@
+/* ============================================================================
+   home.css — identidad institucional de la Home de AC SOJA 25-26.
+   Hoja de estilos APARTE de global.css (que siguen usando Explorar, Comparar
+   y Escenarios sin ningún cambio) -- esta es la primera pieza con la
+   identidad visual definitiva del producto: Inter, fondo claro, bordes
+   suaves, sin sombras, referencias editoriales (Our World in Data / FT),
+   limpieza tipo Stripe, modernidad tipo Notion.
+   ============================================================================ */
+
+:root {
+  --blanco: #ffffff;
+  --fondo-secundario: #F8FAFC;
+  --texto: #111827;
+  --texto-secundario: #667085;
+  --borde: #E5E7EB;
+  --radio: 12px;
+
+  /* ------------------------------------------------------------------------
+     Identidad cromática institucional CREA -- extraída por color-picker
+     directamente de los archivos de logo oficiales del proyecto
+     (assets/logos/logo_crea.jpeg y logo_crea_icono_transparente.png, ambos
+     reproducciones sin recortar del isologo oficial de CREA), no
+     aproximada a ojo. Valores confirmados: verde #009F57, amarillo/dorado
+     #FEDC00, panel oscuro #1C1C1A, en las dos imágenes por igual.
+     --crea-light es el único valor derivado (no está literalmente en el
+     logo): una mezcla del verde institucional al 8% sobre blanco, para
+     fondos y superficies claras sin salirse de la paleta.
+     ------------------------------------------------------------------------ */
+  --crea-green: #009F57;
+  --crea-yellow: #FEDC00;
+  --crea-dark: #1C1C1A;
+  --crea-light: #EBF7F2;
+
+  /* Acentos de módulo -- Comparar y Escenarios pasan a usar los colores
+     institucionales reales (antes eran un naranja y un verde aproximados,
+     no extraídos del logo). Explorar usa azul como diferenciador
+     funcional entre los tres módulos -- no es un color institucional CREA,
+     el logo oficial no tiene azul; se mantiene aparte a propósito. */
+  --acento-explorar: #2563EB;      /* azul -- diferenciador funcional, no institucional */
+  --acento-comparar: var(--crea-yellow);
+  --acento-escenarios: var(--crea-green);
+
+  --fuente: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --ancho-maximo: 1600px;
+}
+
+* { box-sizing: border-box; }
+
+/* Filete verde -- no una franja grande, un trazo fino que ancla la
+   identidad institucional en la parte superior de la página. */
+.franja-superior {
+  height: 4px;
+  background: var(--acento-escenarios);
+}
+
+body.home {
+  margin: 0;
+  font-family: var(--fuente);
+  color: var(--texto);
+  background: var(--blanco);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+
+.envoltura {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* --- Header institucional: blanco, con línea inferior verde CREA de 3px
+   (no una franja grande) -- ancla la identidad institucional sin ocupar
+   superficie. --- */
+.home-header {
+  border-bottom: 3px solid var(--acento-escenarios);
+  background: var(--blanco);
+}
+.home-header .envoltura {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.header-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-marca img { height: 40px; width: auto; display: block; }
+.header-marca-texto { display: flex; flex-direction: column; line-height: 1.25; }
+.header-marca-nombre { font-size: 15px; font-weight: 600; color: var(--texto); }
+.header-marca-bajada { font-size: 12px; color: var(--texto-secundario); }
+.header-derecha { display: flex; align-items: center; gap: 16px; }
+.header-producto { font-size: 15px; font-weight: 600; color: var(--texto); white-space: nowrap; }
+.header-acerca {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--texto-secundario);
+  text-decoration: none;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  padding: 6px 14px 6px 10px;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.header-acerca svg { width: 15px; height: 15px; stroke: currentColor; flex-shrink: 0; }
+.header-acerca:hover { border-color: var(--acento-escenarios); color: var(--acento-escenarios); }
+
+/* --- Hero --- */
+.hero {
+  padding: 72px 0 64px;
+}
+.hero .envoltura {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+  gap: 56px;
+  align-items: center;
+}
+.hero-etiqueta {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--acento-escenarios);
+  margin: 0 0 18px;
+}
+.hero-titulo {
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 14px;
+  color: var(--texto);
+}
+.hero-titulo-acento { color: var(--acento-escenarios); }
+.hero-subtitulo {
+  position: relative;
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--texto);
+  margin: 0 0 30px;
+  padding-bottom: 16px;
+}
+.hero-subtitulo::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 44px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--acento-escenarios);
+}
+.hero-texto {
+  font-size: 16px;
+  color: var(--texto-secundario);
+  max-width: 560px;
+  margin: 0 0 20px;
+  line-height: 1.6;
+}
+.hero-aclaracion {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 560px;
+  padding: 14px 16px;
+  background: color-mix(in srgb, var(--acento-escenarios) 6%, white);
+  border: 1px solid color-mix(in srgb, var(--acento-escenarios) 18%, white);
+  border-radius: var(--radio);
+}
+.hero-aclaracion svg { width: 18px; height: 18px; stroke: var(--acento-escenarios); flex-shrink: 0; margin-top: 1px; }
+.hero-aclaracion p { font-size: 13px; color: var(--texto-secundario); margin: 0; line-height: 1.5; }
+.hero-grafico {
+  width: 112%;
+  max-width: 112%;
+  height: auto;
+  margin-left: 6%;
+  opacity: 0.82;
+  display: block;
+}
+
+/* --- Secciones generales --- */
+.seccion { padding: 56px 0; }
+.seccion + .seccion { border-top: 1px solid var(--borde); }
+.seccion-fondo-secundario { background: var(--fondo-secundario); }
+.seccion-titulo {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+  color: var(--texto);
+}
+.seccion-copete {
+  font-size: 15px;
+  color: var(--texto-secundario);
+  max-width: 640px;
+  margin: 0 0 36px;
+}
+
+/* --- ¿Qué querés analizar? — tarjetas --- */
+.grid-modulos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.tarjeta-modulo {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  border: 1px solid var(--borde);
+  border-top: none;
+  border-radius: var(--radio);
+  padding: 34px 30px;
+  background: var(--blanco);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.tarjeta-modulo::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: var(--radio) var(--radio) 0 0;
+  background: var(--color-modulo);
+}
+.tarjeta-modulo:hover {
+  border-color: var(--color-modulo, var(--texto-secundario));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -12px rgba(17, 24, 39, 0.18);
+}
+.tarjeta-modulo-icono {
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background: color-mix(in srgb, var(--color-modulo) 10%, white);
+}
+.tarjeta-modulo-icono svg { width: 23px; height: 23px; stroke: var(--crea-dark); }
+/* Identificador pequeño del módulo (EXPLORAR/COMPARAR/ESCENARIOS) -- ya no
+   es el elemento principal de la tarjeta, la pregunta lo es. Queda como
+   referencia de a qué pantalla lleva, sin competir con el título. */
+.tarjeta-modulo-etiqueta {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--texto-secundario);
+  margin: 0 0 10px;
+}
+/* La pregunta es el elemento protagonista de la tarjeta -- más grande y con
+   más peso que el título anterior (que era solo un nombre de 2-3 palabras),
+   con line-height ajustado para que las preguntas de dos líneas respiren. */
+.tarjeta-modulo-titulo { font-size: 21px; font-weight: 700; line-height: 1.3; letter-spacing: -0.005em; margin: 0 0 12px; color: var(--crea-dark); }
+.tarjeta-modulo-texto { font-size: 14px; color: var(--texto-secundario); margin: 0 0 20px; line-height: 1.55; }
+.tarjeta-modulo-accion { font-size: 14px; font-weight: 600; color: var(--crea-dark); }
+/* La acción ("Explorar datos →"/"Analizar escenarios →") sí puede llevar el
+   color de acento cuando tiene contraste legible sobre blanco (azul y
+   verde institucional); el amarillo institucional (Comparar) no lo tiene
+   -- ver nota en :root -- así que ese caso queda en --crea-dark. */
+a[href="explorar.html"] .tarjeta-modulo-accion,
+a[href="escenarios.html"] .tarjeta-modulo-accion {
+  color: var(--color-modulo);
+}
+
+/* --- Ficha descriptiva de la base (no son KPI de resultado) -- editorial:
+   el número es el protagonista, sin íconos, sin bordes de tabla. --- */
+.grid-ficha {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 32px 24px;
+}
+.ficha-item {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 160px;
+}
+.ficha-valor { font-size: 38px; font-weight: 700; color: var(--texto); font-variant-numeric: tabular-nums; line-height: 1.1; letter-spacing: -0.01em; }
+.ficha-valor.ficha-cargando { color: var(--texto-secundario); font-weight: 500; font-size: 17px; }
+.ficha-etiqueta { font-size: 13px; color: var(--texto-secundario); margin-top: 6px; }
+.ficha-nota {
+  font-size: 12px;
+  color: var(--texto-secundario);
+  margin: 14px 0 0;
+}
+
+/* --- Cómo utilizar la herramienta --- */
+.grid-pasos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px;
+}
+.paso-encabezado { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.paso-numero-circulo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--crea-light);
+  color: var(--crea-dark);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.paso-icono { width: 20px; height: 20px; stroke: var(--texto-secundario); }
+.paso-titulo { font-size: 17px; font-weight: 600; margin: 0 0 6px; color: var(--texto); }
+.paso-texto { font-size: 14px; color: var(--texto-secundario); margin: 0; line-height: 1.55; }
+
+/* --- Recursos -- grilla editorial: cada recurso se siente como un acceso,
+   no como una fila de tabla. Sin bordes divisorios; el espacio y el hover
+   hacen la separación. --- */
+.grid-recursos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 32px;
+}
+.recurso-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 16px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--texto);
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.recurso-item:hover {
+  background: var(--blanco);
+  border-color: var(--borde);
+  transform: translateX(2px);
+}
+.recurso-item svg:first-child { width: 19px; height: 19px; stroke: var(--texto-secundario); flex-shrink: 0; }
+.recurso-item span:not(.recurso-glifo-texto) { flex: 1; }
+.recurso-glifo-texto {
+  width: 19px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto-secundario);
+  flex-shrink: 0;
+}
+.recurso-flecha { width: 16px; height: 16px; stroke: var(--texto-secundario); flex-shrink: 0; opacity: 0.6; transition: opacity 0.15s ease; }
+.recurso-item:hover .recurso-flecha { opacity: 1; stroke: var(--acento-escenarios); }
+
+/* --- Footer -- misma presencia física, más cuidado tipográfico y de alineación --- */
+.home-footer {
+  border-top: 1px solid var(--borde);
+  padding: 30px 0;
+  background: var(--fondo-secundario);
+}
+.footer-envoltura {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-marca { display: flex; align-items: center; gap: 12px; }
+.footer-marca img { height: 30px; width: auto; display: block; }
+.footer-marca-texto { display: flex; flex-direction: column; line-height: 1.35; }
+.footer-marca-nombre { font-size: 14px; font-weight: 600; color: var(--texto); letter-spacing: -0.005em; }
+.footer-marca-bajada { font-size: 12px; color: var(--texto-secundario); }
+.footer-descripcion { max-width: 440px; }
+.footer-descripcion p { font-size: 12px; color: var(--texto-secundario); margin: 0 0 5px; line-height: 1.55; }
+.footer-descripcion p:last-child { margin-bottom: 0; }
+
+/* --- Responsive --- */
+@media (max-width: 1100px) {
+  .grid-recursos { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 880px) {
+  .hero .envoltura { grid-template-columns: 1fr; }
+  .hero-grafico { max-width: 320px; margin: 0 auto; }
+  .grid-modulos { grid-template-columns: 1fr; }
+  .grid-pasos { grid-template-columns: 1fr; }
+  .grid-ficha { justify-content: flex-start; }
+  .ficha-item { flex: 1 1 45%; }
+  .grid-recursos { grid-template-columns: 1fr; }
+  .hero-titulo { font-size: 44px; }
+  .footer-envoltura { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 560px) {
+  .envoltura { padding: 0 20px; }
+  .header-derecha { gap: 8px; }
+  .header-acerca span, .header-acerca { font-size: 12px; }
+  .header-producto { display: none; }
+  .ficha-item { flex: 1 1 100%; }
+}
