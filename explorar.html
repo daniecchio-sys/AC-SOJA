@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC SOJA 25-26</title>
+<link rel="stylesheet" href="css/global.css">
+<script src="vendor/plotly.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="marca">CREA</span>
+  <span class="nombre-producto">AC SOJA 25-26</span>
+  <nav class="historial-nav" aria-label="Historial de consultas">
+    <button id="historial-atras" class="historial-btn" disabled title="Consulta anterior" aria-label="Consulta anterior">←</button>
+    <button id="historial-adelante" class="historial-btn" disabled title="Consulta siguiente" aria-label="Consulta siguiente">→</button>
+  </nav>
+</header>
+
+<main class="lienzo">
+
+  <section class="bloque-consulta">
+    <div id="consulta"></div>
+    <div class="fila-contexto">
+      <div id="contexto" class="contexto"></div>
+      <button id="comparar-btn" class="link-discreto">+ comparar</button>
+    </div>
+    <div id="contexto-detalle" class="contexto-detalle"></div>
+    <div id="bloque-comparacion" class="bloque-comparacion"></div>
+  </section>
+
+  <section class="bloque-grafico">
+    <div id="grafico-principal"></div>
+    <div id="seleccion-afordancia" class="seleccion-afordancia">
+      <span class="seleccion-texto"></span>
+      <button id="seleccion-confirmar" class="seleccion-boton">Agregar esta condición →</button>
+    </div>
+  </section>
+
+  <!-- Histograma independiente -- mismo criterio ya aplicado en Comparar y
+       en Explorar vigente: ya no comparte lienzo de Plotly con el gráfico
+       principal. -->
+  <section class="bloque-histograma">
+    <p class="frecuencia-titulo" title="Cantidad de lotes utilizados para calcular cada ventana.">Frecuencia de observaciones</p>
+    <div id="histograma-principal"></div>
+  </section>
+
+  <!-- Indicadores destacados -- mismo criterio ya aplicado en Explorar vigente. -->
+  <section class="bloque-kpis-destacados">
+    <h3 class="kpis-destacados-titulo">Indicadores destacados</h3>
+    <div class="grid-kpis-destacados" id="grid-kpis-explorar"></div>
+    <div class="aclaraciones-metodologicas" id="aclaraciones-explorar">
+      <p>Los resultados describen comportamientos observados y no constituyen predicciones ni recomendaciones agronómicas.</p>
+    </div>
+  </section>
+
+  <section class="bloque-valores">
+    <details class="valores-exactos">
+      <summary>Ver valores exactos</summary>
+      <table class="tabla-ventanas">
+        <thead>
+          <tr><th>Ventana</th><th>n</th><th>Mín</th><th>P25</th><th>Mediana</th><th>P75</th><th>Máx</th></tr>
+        </thead>
+        <tbody id="tabla-ventanas-body"></tbody>
+      </table>
+    </details>
+  </section>
+
+</main>
+
+<footer class="pie">CREA · AC SOJA 25-26 · prototipo interno, no distribuir</footer>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

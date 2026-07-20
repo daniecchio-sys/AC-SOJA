@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC SOJA 25–26 · Red Agrícola CREA COR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body class="home">
+
+<!-- ============================================================
+     1. Header institucional -- blanco, sin franja verde.
+     ============================================================ -->
+<header class="home-header">
+  <div class="envoltura">
+    <div class="header-marca">
+      <img src="assets/logos/logo_crea_icono_transparente.png" alt="CREA">
+      <div class="header-marca-texto">
+        <span class="header-marca-nombre">CREA COR</span>
+        <span class="header-marca-bajada">Agricultura basada en evidencia</span>
+      </div>
+    </div>
+    <span class="header-producto">AC SOJA 25–26</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       2. Hero
+       ============================================================ -->
+  <section class="hero">
+    <div class="envoltura">
+      <div>
+        <p class="hero-etiqueta">Red agrícola CREA COR</p>
+        <h1 class="hero-titulo">AC SOJA</h1>
+        <p class="hero-subtitulo">Análisis histórico del cultivo de soja</p>
+        <p class="hero-texto">
+          Herramienta interactiva para explorar el comportamiento observado del cultivo de soja en lotes comerciales de la red CREA COR.
+        </p>
+        <p class="hero-texto">
+          Permite analizar variables ambientales y de manejo, comparar alternativas y estudiar escenarios construidos a partir de información histórica.
+        </p>
+        <p class="hero-aclaracion">
+          Los resultados describen comportamientos observados y no constituyen predicciones ni recomendaciones agronómicas.
+        </p>
+      </div>
+
+      <!-- Composición gráfica abstracta: parcelas, curva de tendencia y
+           puntos de datos -- sin fotografías, muy sutil (opacidades bajas). -->
+      <svg class="hero-grafico" viewBox="0 0 440 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="40" y="40" width="150" height="110" rx="14" fill="#2563EB" opacity="0.06" transform="rotate(-4 115 95)"/>
+        <rect x="210" y="70" width="170" height="130" rx="14" fill="#16A34A" opacity="0.07" transform="rotate(3 295 135)"/>
+        <rect x="70" y="190" width="190" height="130" rx="14" fill="#EA580C" opacity="0.06" transform="rotate(-2 165 255)"/>
+        <rect x="250" y="220" width="130" height="100" rx="14" fill="#2563EB" opacity="0.05" transform="rotate(5 315 270)"/>
+
+        <path d="M30 260 C 100 220, 150 300, 220 190 S 340 120, 410 150" stroke="#111827" stroke-opacity="0.18" stroke-width="2" stroke-linecap="round"/>
+
+        <circle cx="60" cy="245" r="4" fill="#2563EB" opacity="0.55"/>
+        <circle cx="105" cy="228" r="3" fill="#2563EB" opacity="0.4"/>
+        <circle cx="150" cy="255" r="5" fill="#EA580C" opacity="0.5"/>
+        <circle cx="185" cy="205" r="3" fill="#16A34A" opacity="0.45"/>
+        <circle cx="225" cy="192" r="4" fill="#16A34A" opacity="0.55"/>
+        <circle cx="265" cy="165" r="3" fill="#2563EB" opacity="0.4"/>
+        <circle cx="300" cy="178" r="4" fill="#EA580C" opacity="0.45"/>
+        <circle cx="340" cy="140" r="3" fill="#16A34A" opacity="0.4"/>
+        <circle cx="375" cy="155" r="5" fill="#2563EB" opacity="0.5"/>
+        <circle cx="405" cy="148" r="3" fill="#EA580C" opacity="0.4"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. ¿Qué querés analizar? -- tres tarjetas iguales, clickeables
+       ============================================================ -->
+  <section class="seccion">
+    <div class="envoltura">
+      <h2 class="seccion-titulo">¿Qué querés analizar?</h2>
+      <p class="seccion-copete">Cada módulo responde una pregunta distinta sobre la misma base histórica.</p>
+
+      <div class="grid-modulos">
+        <a class="tarjeta-modulo" href="index.html" style="--color-modulo: var(--acento-explorar);">
+          <div class="tarjeta-modulo-icono">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17L9 11L13 15L21 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6H21V12" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="tarjeta-modulo-titulo">Explorar relaciones</h3>
+          <p class="tarjeta-modulo-texto">Analizá cómo se comportó el rendimiento frente a variables ambientales, productivas y de manejo.</p>
+          <span class="tarjeta-modulo-accion">Explorar datos →</span>
+        </a>
+
+        <a class="tarjeta-modulo" href="comparar.html" style="--color-modulo: var(--acento-comparar);">
+          <div class="tarjeta-modulo-icono">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="9" width="6" height="11" rx="1" stroke-width="1.8"/><rect x="14" y="4" width="6" height="16" rx="1" stroke-width="1.8"/></svg>
+          </div>
+          <h3 class="tarjeta-modulo-titulo">Comparar alternativas</h3>
+          <p class="tarjeta-modulo-texto">Contrastá ciclos, fechas de siembra, ambientes u otras categorías sobre una misma base histórica.</p>
+          <span class="tarjeta-modulo-accion">Comparar resultados →</span>
+        </a>
+
+        <a class="tarjeta-modulo" href="escenarios.html" style="--color-modulo: var(--acento-escenarios);">
+          <div class="tarjeta-modulo-icono">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L21 8L12 13L3 8L12 3Z" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 13L12 18L21 13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="tarjeta-modulo-titulo">Analizar escenarios</h3>
+          <p class="tarjeta-modulo-texto">Explorá combinaciones de ambiente, fecha de siembra y ciclo, y observá su comportamiento histórico.</p>
+          <span class="tarjeta-modulo-accion">Analizar escenarios →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. La información detrás del análisis -- ficha descriptiva,
+       valores calculados en vivo desde la base real (nunca hardcodeados).
+       ============================================================ -->
+  <section class="seccion seccion-fondo-secundario">
+    <div class="envoltura">
+      <h2 class="seccion-titulo">La información detrás del análisis</h2>
+      <p class="seccion-copete">Ficha descriptiva de la base -- no son indicadores de resultado, solo dimensionan la evidencia disponible.</p>
+
+      <div class="grid-ficha" id="ficha-base">
+        <div class="ficha-item"><div class="ficha-valor ficha-cargando" data-campo="campanas">—</div><div class="ficha-etiqueta">Campañas relevadas</div></div>
+        <div class="ficha-item"><div class="ficha-valor ficha-cargando" data-campo="registros">—</div><div class="ficha-etiqueta">Registros históricos</div></div>
+        <div class="ficha-item"><div class="ficha-valor ficha-cargando" data-campo="localidades">—</div><div class="ficha-etiqueta">Localidades</div></div>
+        <div class="ficha-item"><div class="ficha-valor ficha-cargando" data-campo="ambientes">—</div><div class="ficha-etiqueta">Zonas / ambientes</div></div>
+        <div class="ficha-item"><div class="ficha-valor ficha-cargando" data-campo="ciclos">—</div><div class="ficha-etiqueta">Ciclos de manejo</div></div>
+      </div>
+      <p class="ficha-nota" id="ficha-nota" style="display:none;">No se pudo cargar la base para calcular estos valores en este momento.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. Cómo utilizar la herramienta
+       ============================================================ -->
+  <section class="seccion">
+    <div class="envoltura">
+      <h2 class="seccion-titulo">Cómo utilizar la herramienta</h2>
+      <div class="grid-pasos">
+        <div>
+          <p class="paso-numero">Paso 1</p>
+          <p class="paso-titulo">Seleccioná el módulo</p>
+        </div>
+        <div>
+          <p class="paso-numero">Paso 2</p>
+          <p class="paso-titulo">Definí el contexto</p>
+        </div>
+        <div>
+          <p class="paso-numero">Paso 3</p>
+          <p class="paso-titulo">Interpretá la evidencia</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. Recursos
+       ============================================================ -->
+  <section class="seccion seccion-fondo-secundario">
+    <div class="envoltura">
+      <h2 class="seccion-titulo">Recursos</h2>
+      <p class="seccion-copete">Documentación de referencia del proyecto -- disponible próximamente.</p>
+      <div class="grid-recursos">
+        <div class="recurso-item"><span class="recurso-punto"></span>Metodología</div>
+        <div class="recurso-item"><span class="recurso-punto"></span>Variables disponibles</div>
+        <div class="recurso-item"><span class="recurso-punto"></span>Cobertura de la información</div>
+        <div class="recurso-item"><span class="recurso-punto"></span>Definiciones y glosario</div>
+        <div class="recurso-item"><span class="recurso-punto"></span>Alcances y limitaciones</div>
+        <div class="recurso-item"><span class="recurso-punto"></span>Acerca del proyecto</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     7. Footer institucional
+     ============================================================ -->
+<footer class="home-footer">
+  <div class="envoltura">
+    <span class="footer-texto">CREA COR · AC SOJA 25–26</span>
+    <span class="footer-texto">Los resultados describen comportamientos observados y no constituyen predicciones ni recomendaciones agronómicas.</span>
+  </div>
+</footer>
+
+<script type="module" src="js/home-app.js"></script>
+
+</body>
+</html>

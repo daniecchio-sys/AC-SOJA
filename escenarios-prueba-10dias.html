@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC SOJA 25-26 · Escenarios · Prueba ventanas 10 días</title>
+<link rel="stylesheet" href="css/global.css">
+<script src="vendor/plotly.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="marca">CREA</span>
+  <span class="nombre-producto">AC SOJA 25-26 · Escenarios · PRUEBA — Ventanas de 10 días</span>
+  <nav class="historial-nav" aria-label="Navegación entre módulos">
+    <button id="historial-atras" class="historial-btn" disabled title="Estado anterior" aria-label="Estado anterior">←</button>
+    <button id="historial-adelante" class="historial-btn" disabled title="Estado siguiente" aria-label="Estado siguiente">→</button>
+    <a href="escenarios.html" class="historial-btn" title="Ir a Escenarios (vigente)" style="text-decoration:none;display:inline-flex;align-items:center;margin-left:8px;">Escenarios (vigente)</a>
+  </nav>
+</header>
+
+<main class="lienzo">
+
+  <p style="font-size:12px;color:var(--texto-tenue);max-width:680px;margin:0 0 16px;padding:8px 12px;border-left:2px solid var(--linea-fuerte);">
+    Prueba metodológica reversible. Esta página usa 11 ventanas de ~10 días en vez de las 21 de 5 días vigentes,
+    en el heatmap, el ranking y la tabla de valores exactos. No reemplaza <a href="escenarios.html">Escenarios</a> -- ambas versiones conviven para comparar resultados.
+  </p>
+
+  <!-- Título estable del módulo -- ya no depende de las condiciones activas.
+       Las condiciones se resumen en la tarjeta del ambiente, no acá. -->
+  <div class="escenarios-titulo-bloque">
+    <h1 class="escenarios-titulo-estable">¿Qué estrategias de fecha de siembra y ciclo mostraron distintos comportamientos bajo este ambiente?</h1>
+    <p class="escenarios-titulo-aclaracion">Una estrategia corresponde a una combinación de fecha de siembra y ciclo evaluada dentro del ambiente seleccionado.</p>
+  </div>
+
+  <!-- 1. Constructor del escenario -->
+  <section class="bloque-consulta bloque-consulta-compacta">
+    <div id="escenario-oracion"></div>
+  </section>
+
+  <!-- 2. Resumen del ambiente + Lotes registrados que superaron, en la
+       misma fila -- ver nota equivalente en escenarios.html. -->
+  <div class="fila-resumen-y-lotes">
+    <section class="tarjeta-ambiente" id="tarjeta-ambiente">
+      <div id="indicador-principal" class="indicador-compacto"></div>
+      <p id="mensaje-piso-minimo" class="mensaje-piso-minimo" style="display:none;"></p>
+      <div id="tarjeta-escenario-contenido"></div>
+    </section>
+
+    <section class="tarjeta-ambiente bloque-lotes-superados-compacto" id="bloque-lotes-superados" style="display:none;">
+      <div class="indicador-titulo">Lotes registrados que superaron</div>
+      <div id="lotes-superados-lista" class="lotes-superados-fila"></div>
+      <p id="lotes-superados-base" class="lote-superado-base"></p>
+    </section>
+  </div>
+
+  <div id="area-analisis" style="display:none;">
+
+    <!--
+      3. Heatmap Fecha de siembra × Ciclo. Con 11 ventanas de 10 días (en
+      vez de 21 de 5), el heatmap completo entra en pantalla de una vez --
+      sin deslizador de rango ni scroll lateral.
+    -->
+    <section class="bloque-heatmap">
+      <div class="heatmap-encabezado">
+        <h3 class="heatmap-titulo">Estrategias evaluadas</h3>
+      </div>
+
+      <div id="grafico-heatmap"></div>
+
+      <button id="toggle-ciclos-eventuales" class="agregar-grupo" style="margin-top:8px;">+ mostrar ciclos con uso eventual</button>
+    </section>
+
+    <!-- 4. Indicadores destacados: inmediatamente sobre el ranking -->
+    <section class="bloque-kpis-destacados">
+      <h3 class="kpis-destacados-titulo">Indicadores destacados</h3>
+      <div class="grid-kpis-destacados" id="grid-kpis-destacados"></div>
+      <div class="aclaraciones-metodologicas">
+        <p>Los indicadores se calculan únicamente sobre estrategias con n ≥ 20.</p>
+        <p>Los resultados describen comportamientos observados en lotes comerciales comparables.</p>
+        <p>No constituyen una predicción ni una recomendación agronómica.</p>
+      </div>
+    </section>
+
+    <!-- 5. Ranking de combinaciones -->
+    <section class="bloque-ranking" id="bloque-ranking"></section>
+
+    <!-- 6. Gráfico de dispersión -->
+    <section class="bloque-dispersion">
+      <h3 class="dispersion-titulo">Relación entre rendimiento y dispersión de las estrategias</h3>
+      <p class="dispersion-caption">
+        Cada punto representa una combinación de fecha de siembra y ciclo con n ≥ 20.
+        Hacia la derecha aumenta la mediana; hacia abajo disminuye la dispersión.
+        El tamaño representa la cantidad de lotes evaluados.
+      </p>
+      <p class="dispersion-caption-secundaria">
+        Las líneas punteadas son referencias relativas dentro del escenario; no representan umbrales agronómicos ni recomendaciones.
+      </p>
+      <div id="grafico-dispersion"></div>
+    </section>
+
+    <!-- Elemento descriptivo final -->
+
+    <!-- Tabla de valores exactos (agregado global del escenario, no por ciclo) -->
+    <section class="bloque-valores">
+      <details class="valores-exactos">
+        <summary>Ver valores exactos</summary>
+        <table class="tabla-ventanas">
+          <thead>
+            <tr><th>Ventana</th><th>n</th><th>Mín</th><th>P25</th><th>Mediana</th><th>P75</th><th>Máx</th></tr>
+          </thead>
+          <tbody id="tabla-escenario-body"></tbody>
+        </table>
+      </details>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="pie">CREA · AC SOJA 25-26 · Escenarios · PRUEBA ventanas 10 días · no distribuir</footer>
+
+<script type="module" src="js/escenario-app-prueba-10dias.js"></script>
+</body>
+</html>
+

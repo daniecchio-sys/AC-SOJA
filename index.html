@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC SOJA 25–26 · Red Agrícola CREA COR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body class="home">
+
+<div class="franja-superior" aria-hidden="true"></div>
+
+<!-- ============================================================
+     1. Header institucional -- blanco, con un filete verde arriba
+     (no una franja grande), y un enlace secundario a "Acerca del
+     proyecto" junto al nombre del producto.
+     ============================================================ -->
+<header class="home-header">
+  <div class="envoltura">
+    <div class="header-marca">
+      <img src="assets/logos/logo_crea_icono_transparente.png" alt="CREA">
+      <div class="header-marca-texto">
+        <span class="header-marca-nombre">CREA COR</span>
+        <span class="header-marca-bajada">Agricultura basada en evidencia</span>
+      </div>
+    </div>
+    <div class="header-derecha">
+      <span class="header-producto">AC SOJA 25–26</span>
+      <a href="recursos.html#acerca-del-proyecto" class="header-acerca">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke-width="1.6"/><path d="M12 11v5M12 8h.01" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Acerca del proyecto
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       2. Hero
+       ============================================================ -->
+  <section class="hero">
+    <div class="envoltura">
+      <div>
+        <p class="hero-etiqueta">Red agrícola CREA COR</p>
+        <h1 class="hero-titulo">AC <span class="hero-titulo-acento">SOJA</span></h1>
+        <p class="hero-subtitulo">Análisis histórico del cultivo de soja</p>
+        <p class="hero-texto">
+          Herramienta interactiva para explorar el comportamiento observado del cultivo de soja en lotes comerciales de la red CREA COR.
+        </p>
+        <p class="hero-texto">
+          Permite analizar variables ambientales y de manejo, comparar alternativas y estudiar escenarios construidos a partir de información histórica.
+        </p>
+        <div class="hero-aclaracion">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke-width="1.6"/><path d="M15 9l-2 6-6 2 2-6 6-2Z" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <p>Los resultados describen comportamientos observados y no constituyen predicciones ni recomendaciones agronómicas.</p>
+        </div>
+      </div>
+
+      <!-- Composición gráfica abstracta -- ajustada a la referencia visual:
+           blob circular cálido de fondo, grilla de puntos, campo isométrico
+           de parcelas (rombos alternados verde/arena), dos curvas de
+           tendencia con marcadores sobre la propia línea, y un glifo de
+           barras. Sin fotografías, tonos institucionales en baja opacidad. -->
+      <svg class="hero-grafico" viewBox="0 0 440 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <ellipse cx="240" cy="195" rx="195" ry="175" fill="#F0D9C2" opacity="0.4"/>
+
+        <g opacity="0.4">
+          <circle cx="30" cy="42" r="1.6" fill="#8c8c84"/>
+          <circle cx="50" cy="42" r="1.6" fill="#8c8c84"/>
+          <circle cx="70" cy="42" r="1.6" fill="#8c8c84"/>
+          <circle cx="90" cy="42" r="1.6" fill="#8c8c84"/>
+          <circle cx="30" cy="62" r="1.6" fill="#8c8c84"/>
+          <circle cx="50" cy="62" r="1.6" fill="#8c8c84"/>
+          <circle cx="70" cy="62" r="1.6" fill="#8c8c84"/>
+          <circle cx="90" cy="62" r="1.6" fill="#8c8c84"/>
+          <circle cx="30" cy="82" r="1.6" fill="#8c8c84"/>
+          <circle cx="50" cy="82" r="1.6" fill="#8c8c84"/>
+          <circle cx="70" cy="82" r="1.6" fill="#8c8c84"/>
+          <circle cx="90" cy="82" r="1.6" fill="#8c8c84"/>
+        </g>
+
+        <!-- campo isométrico de parcelas -- grilla de rombos alternados -->
+        <g>
+          <polygon points="190,239 212,250 190,261 168,250" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="212,250 234,261 212,272 190,261" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="234,261 256,272 234,283 212,272" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="256,272 278,283 256,294 234,283" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="278,283 300,294 278,305 256,294" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="300,294 322,305 300,316 278,305" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="168,250 190,261 168,272 146,261" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="190,261 212,272 190,283 168,272" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="212,272 234,283 212,294 190,283" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="234,283 256,294 234,305 212,294" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="256,294 278,305 256,316 234,305" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="278,305 300,316 278,327 256,316" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="146,261 168,272 146,283 124,272" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="168,272 190,283 168,294 146,283" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="190,283 212,294 190,305 168,294" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="212,294 234,305 212,316 190,305" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="234,305 256,316 234,327 212,316" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="256,316 278,327 256,338 234,327" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="124,272 146,283 124,294 102,283" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="146,283 168,294 146,305 124,294" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="168,294 190,305 168,316 146,305" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="190,305 212,316 190,327 168,316" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="212,316 234,327 212,338 190,327" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="234,327 256,338 234,349 212,338" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="102,283 124,294 102,305 80,294" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="124,294 146,305 124,316 102,305" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="146,305 168,316 146,327 124,316" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="168,316 190,327 168,338 146,327" fill="#E7C9A0" opacity="0.55"/>
+          <polygon points="190,327 212,338 190,349 168,338" fill="#8FBF9F" opacity="0.55"/>
+          <polygon points="212,338 234,349 212,360 190,349" fill="#E7C9A0" opacity="0.55"/>
+        </g>
+
+        <!-- curvas de tendencia, con marcadores sobre la propia línea -->
+        <path d="M30 270 C 90 240, 140 300, 190 220 S 300 130, 350 140 S 400 95, 415 90" stroke="#3f7a52" stroke-opacity="0.65" stroke-width="2" stroke-linecap="round"/>
+        <path d="M50 300 C 100 285, 160 320, 210 270 S 320 230, 370 175" stroke="#c9784a" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round"/>
+
+        <circle cx="30" cy="270" r="4" fill="#3f7a52"/>
+        <circle cx="110" cy="255" r="3.5" fill="#3f7a52"/>
+        <circle cx="190" cy="220" r="4" fill="#3f7a52"/>
+        <circle cx="270" cy="165" r="3.5" fill="#3f7a52"/>
+        <circle cx="350" cy="140" r="4" fill="#3f7a52"/>
+        <circle cx="415" cy="90" r="4.5" fill="#3f7a52"/>
+
+        <circle cx="50" cy="300" r="4" fill="#c9784a"/>
+        <circle cx="130" cy="300" r="3.5" fill="#c9784a"/>
+        <circle cx="210" cy="270" r="4" fill="#c9784a"/>
+        <circle cx="290" cy="235" r="3.5" fill="#c9784a"/>
+        <circle cx="370" cy="175" r="4.5" fill="#c9784a"/>
+
+        <!-- glifo de barras -->
+        <g opacity="0.7">
+          <rect x="368" y="75" width="9" height="18" rx="2" fill="#c9784a"/>
+          <rect x="382" y="60" width="9" height="33" rx="2" fill="#3f7a52"/>
+          <rect x="396" y="45" width="9" height="48" rx="2" fill="#c9784a"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. ¿Qué querés analizar? -- tres tarjetas iguales, clickeables
+       ============================================================ -->
+  <section class="seccion">
+    <div class="envoltura">
+      <h2 class="seccion-titulo">¿Qué querés analizar?</h2>
+      <p class="seccion-copete">Cada módulo responde una pregunta distinta sobre la misma base histórica.</p>
+
+      <div class="grid-modulos">
+        <a class="tarjeta-modulo" href="explorar.html" style="--color-modulo: var(--acento-explorar);">
+          <div class="tarjeta-modulo-icono">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17L9 11L13 15L21 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6H21V12" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="tarjeta-modulo-etiqueta">🔍 Explorar</span>
+          <h3 class="tarjeta-modulo-titulo">¿Cómo se comportó históricamente el cultivo?</h3>
+          <p class="tarjeta-modulo-texto">Explorá la relación entre el rendimiento y las variables ambientales, de manejo y productivas registradas en la base histórica.</p>
+          <span class="tarjeta-modulo-accion">Explorar datos →</span>
+        </a>
+
+        <a class="tarjeta-modulo" href="comparar.html" style="--color-modulo: var(--acento-comparar);">
+          <div class="tarjeta-modulo-icono">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3V21" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M5 21H19" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M6 6H18" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M6 6L3.5 11.5a2.8 2.8 0 0 0 5.4 0L6 6Z" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M18 6L15.5 11.5a2.8 2.8 0 0 0 5.4 0L18 6Z" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="tarjeta-modulo-etiqueta">⚖️ Comparar</span>
+          <h3 class="tarjeta-modulo-titulo">¿Qué diferencias se observaron entre distintas alternativas?</h3>
+          <p class="tarjeta-modulo-texto">Compará materiales, fechas de siembra, ciclos, ambientes y otras categorías utilizando la misma base de información histórica.</p>
+          <span class="tarjeta-modulo-accion">Comparar resultados →</span>
+        </a>
+
+        <a class="tarjeta-modulo" href="escenarios.html" style="--color-modulo: var(--acento-escenarios);">
+          <div class="tarjeta-modulo-icono">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 3v18" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M6 6h7l2.5 2.5L13 11H6V6Z" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M18 13h-8l-2 2 2 2h8v-4Z" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="tarjeta-modulo-etiqueta">🧭 Escenarios</span>
+          <h3 class="tarjeta-modulo-titulo">¿Cómo se comportaron distintas estrategias de manejo?</h3>
+          <p class="tarjeta-modulo-texto">Analizá combinaciones de ambiente, fecha de siembra y ciclo para conocer el comportamiento histórico de distintas estrategias de manejo.</p>
+          <span class="tarjeta-modulo-accion">Analizar escenarios →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. La información detrás del análisis -- ficha descriptiva,
+       valores calculados en vivo desde la base real (nunca hardcodeados).
+       Ficha editorial: el número es protagonista, sin íconos, sin bordes
+       de tabla.
+       ============================================================ -->
+  <section class="seccion seccion-fondo-secundario">
+    <div class="envoltura">
+      <h2 class="seccion-titulo">La información detrás del análisis</h2>
+      <p class="seccion-copete">Ficha descriptiva de la base — no son indicadores de resultado, solo dimensionan la evidencia disponible.</p>
+
+      <div class="grid-ficha" id="ficha-base">
+        <div class="ficha-item">
+          <div class="ficha-valor ficha-cargando" data-campo="campanas">—</div>
+          <div class="ficha-etiqueta">Campañas relevadas</div>
+        </div>
+        <div class="ficha-item">
+          <div class="ficha-valor ficha-cargando" data-campo="registros">—</div>
+          <div class="ficha-etiqueta">Registros históricos</div>
+        </div>
+        <div class="ficha-item">
+          <div class="ficha-valor ficha-cargando" data-campo="localidades">—</div>
+          <div class="ficha-etiqueta">Localidades</div>
+        </div>
+        <div class="ficha-item">
+          <div class="ficha-valor ficha-cargando" data-campo="ambientes">—</div>
+          <div class="ficha-etiqueta">Zonas / ambientes</div>
+        </div>
+        <div class="ficha-item">
+          <div class="ficha-valor ficha-cargando" data-campo="ciclos">—</div>
+          <div class="ficha-etiqueta">Ciclos de manejo</div>
+        </div>
+      </div>
+      <p class="ficha-nota" id="ficha-nota" style="display:none;">No se pudo cargar la base para calcular estos valores en este momento.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. Cómo utilizar la herramienta
+       ============================================================ -->
+  <section class="seccion">
+    <div class="envoltura">
+      <h2 class="seccion-titulo">Cómo utilizar la herramienta</h2>
+      <div class="grid-pasos">
+        <div class="paso">
+          <div class="paso-encabezado">
+            <span class="paso-numero-circulo">1</span>
+            <svg class="paso-icono" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="12" rx="1.5" stroke-width="1.7"/><path d="M8 20h8M12 16v4" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
+          <p class="paso-titulo">Seleccioná el módulo</p>
+          <p class="paso-texto">Elegí entre explorar, comparar o analizar escenarios según la pregunta que quieras responder.</p>
+        </div>
+        <div class="paso">
+          <div class="paso-encabezado">
+            <span class="paso-numero-circulo">2</span>
+            <svg class="paso-icono" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h9M17 6h3M4 12h4M12 12h8M4 18h12M20 18h0" stroke-width="1.7" stroke-linecap="round"/><circle cx="13" cy="6" r="2" stroke-width="1.7"/><circle cx="8" cy="12" r="2" stroke-width="1.7"/><circle cx="16" cy="18" r="2" stroke-width="1.7"/></svg>
+          </div>
+          <p class="paso-titulo">Definí el contexto</p>
+          <p class="paso-texto">Aplicá filtros de ambiente, campaña, variables y categorías disponibles para ajustar el análisis.</p>
+        </div>
+        <div class="paso">
+          <div class="paso-encabezado">
+            <span class="paso-numero-circulo">3</span>
+            <svg class="paso-icono" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20V10M12 20V4M20 20v-7" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
+          <p class="paso-titulo">Interpretá la evidencia</p>
+          <p class="paso-texto">Observá resultados históricos, dispersión y respaldo muestral para una interpretación informada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. Recursos
+       ============================================================ -->
+  <section class="seccion seccion-fondo-secundario" id="recursos">
+    <div class="envoltura">
+      <h2 class="seccion-titulo">Recursos</h2>
+      <p class="seccion-copete">Documentación de referencia del proyecto.</p>
+      <div class="grid-recursos">
+        <a class="recurso-item" href="recursos.html#metodologia">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6c-1.5-1.3-4-2-7-2v13c3 0 5.5.7 7 2 1.5-1.3 4-2 7-2V4c-3 0-5.5.7-7 2Z" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 6v13" stroke-width="1.6"/></svg>
+          <span>Metodología</span>
+          <svg class="recurso-flecha" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="recurso-item" href="recursos.html#variables-disponibles">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6h11M9 12h11M9 18h11" stroke-width="1.6" stroke-linecap="round"/><circle cx="4.5" cy="6" r="1.2" fill="currentColor" stroke="none"/><circle cx="4.5" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="4.5" cy="18" r="1.2" fill="currentColor" stroke="none"/></svg>
+          <span>Variables disponibles</span>
+          <svg class="recurso-flecha" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="recurso-item" href="recursos.html#cobertura-de-la-informacion">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.2" stroke-width="1.6"/></svg>
+          <span>Cobertura de la información</span>
+          <svg class="recurso-flecha" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="recurso-item" href="recursos.html#definiciones-y-glosario">
+          <span class="recurso-glifo-texto">Aa</span>
+          <span>Definiciones y glosario</span>
+          <svg class="recurso-flecha" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="recurso-item" href="recursos.html#alcances-y-limitaciones">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke-width="1.6"/><path d="M12 11v5M12 8h.01" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Alcances y limitaciones</span>
+          <svg class="recurso-flecha" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="recurso-item" href="recursos.html#acerca-del-proyecto">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="8" r="3" stroke-width="1.6"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5" stroke-width="1.6" stroke-linecap="round"/><path d="M16 8a3 3 0 1 1 3 3" stroke-width="1.6" stroke-linecap="round"/><path d="M21 20c0-2.5-1.8-4.2-4-4.8" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Acerca del proyecto</span>
+          <svg class="recurso-flecha" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     7. Footer institucional
+     ============================================================ -->
+<footer class="home-footer">
+  <div class="envoltura footer-envoltura">
+    <div class="footer-marca">
+      <img src="assets/logos/logo_crea_icono_transparente.png" alt="CREA">
+      <div class="footer-marca-texto">
+        <span class="footer-marca-nombre">AC SOJA 25–26</span>
+        <span class="footer-marca-bajada">Red Agrícola CREA COR</span>
+      </div>
+    </div>
+    <div class="footer-descripcion">
+      <p>Herramienta de análisis descriptivo basada en información histórica de lotes comerciales.</p>
+      <p>Los resultados describen comportamientos observados y no constituyen predicciones ni recomendaciones agronómicas.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/home-app.js"></script>
+
+</body>
+</html>

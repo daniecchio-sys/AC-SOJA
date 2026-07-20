@@ -1,0 +1,25 @@
+{
+  "name": "ac-soja-25-26",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Explorador de Rendimientos segun Fecha de Siembra - motor + prototipo de experiencia",
+  "scripts": {
+    "test:engine": "node test/engine-test.js",
+    "test:ui": "node test/smoke-test-ui.mjs",
+    "test:engine:comparar": "node test/engine-test-comparar.mjs",
+    "test:ui:comparar": "node test/smoke-test-comparar.mjs",
+    "test:historial:comparar": "node test/smoke-test-comparar-historial.mjs",
+    "test:query-builder": "node test/engine-test-query-builder.mjs",
+    "test:engine:escenarios": "node test/engine-test-escenarios.mjs",
+    "test:engine:escenarios:v2": "node test/engine-test-escenarios-v2.mjs",
+    "test:ui:escenarios": "node test/smoke-test-escenarios.mjs",
+    "test:home": "node test/smoke-test-home.mjs",
+    "comparacion-5-vs-10-dias": "node test/comparacion-ventanas-5-vs-10-dias.mjs",
+    "comparacion-5-vs-10-dias:escenarios": "node test/comparacion-escenarios-5-vs-10-dias.mjs",
+    "preview": "python3 -m http.server 8098"
+  },
+  "devDependencies": {
+    "jsdom": "^24.0.0"
+  }
+}

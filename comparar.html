@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC SOJA 25-26 · Comparar</title>
+<link rel="stylesheet" href="css/global.css">
+<script src="vendor/plotly.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="marca">CREA</span>
+  <span class="nombre-producto">AC SOJA 25-26 · Comparar</span>
+  <nav class="historial-nav" aria-label="Navegación entre módulos">
+    <button id="historial-atras" class="historial-btn" disabled title="Estado anterior" aria-label="Estado anterior">←</button>
+    <button id="historial-adelante" class="historial-btn" disabled title="Estado siguiente" aria-label="Estado siguiente">→</button>
+    <a href="explorar.html" class="historial-btn" title="Ir a Explorar" style="text-decoration:none;display:inline-flex;align-items:center;margin-left:8px;">Explorar</a>
+    <a href="escenarios.html" class="historial-btn" title="Ir a Escenarios" style="text-decoration:none;display:inline-flex;align-items:center;margin-left:8px;">Escenarios</a>
+  </nav>
+</header>
+
+<main class="lienzo">
+
+  <!-- 1. Título del módulo: pregunta estable, ya no depende del contexto ni
+       de la variable activa. Identidad propia de Comparar -- contrasta
+       grupos, no explora un único subconjunto. -->
+  <div class="comparar-titulo-bloque">
+    <h1 class="comparar-titulo-estable">¿Qué diferencias aparecen entre distintos grupos según la fecha de siembra?</h1>
+    <p class="comparar-contexto-corto" id="contexto-corto"></p>
+    <p class="comparar-comparando-corto" id="comparando-corto"></p>
+  </div>
+
+  <!-- 2. Constructor de comparación: contexto (condiciones removibles +
+       agregar) y la variable de comparación -- acá vive la interacción,
+       separada de los resúmenes de lectura rápida de arriba. -->
+  <section class="bloque-consulta bloque-consulta-compacta">
+    <div id="contexto-oracion"></div>
+    <div class="selector-variable">
+      <label for="select-variable">Comparar por:</label>
+      <select id="select-variable"></select>
+    </div>
+  </section>
+
+  <!-- 3. Tarjeta resumen del universo -->
+  <section class="tarjeta-ambiente" id="tarjeta-universo"></section>
+
+  <!-- 4. Tarjetas de grupo -- única fuente de "nombre + n" en pantalla -->
+  <div id="fila-grupos" class="fila-grupos"></div>
+
+  <!-- 5. Gráfico principal -->
+  <section class="bloque-grafico">
+    <div id="grafico-comparativo"></div>
+    <label class="toggle-bandas">
+      <input type="checkbox" id="toggle-bandas" checked>
+      Mostrar bandas P25–P75
+    </label>
+  </section>
+
+  <!-- 6. Histograma independiente -- ya no comparte lienzo de Plotly con el
+       gráfico principal (antes eran dos filas del mismo gráfico). Mismo eje
+       X (mismas ventanas), altura propia fija para que ocultar/mostrar
+       bandas en el gráfico de arriba nunca lo mueva ni invada el espacio de
+       los KPIs de más abajo. -->
+  <section class="bloque-histograma">
+    <p class="frecuencia-titulo" title="Cantidad de lotes utilizados para calcular cada ventana.">Frecuencia de observaciones</p>
+    <div id="histograma-comparativo"></div>
+  </section>
+
+  <!-- 7. Indicadores comparativos, como tarjetas -- mismo lenguaje visual que Escenarios -->
+  <section class="bloque-kpis-destacados">
+    <div class="grid-kpis-destacados" id="grid-indicadores-comparativos"></div>
+    <div class="aclaraciones-metodologicas">
+      <p>Los indicadores se calculan únicamente sobre ventanas donde todos los grupos comparados alcanzan n ≥ 20.</p>
+      <p>Los resultados describen diferencias observadas entre grupos.</p>
+      <p>No representan recomendaciones ni predicciones.</p>
+    </div>
+  </section>
+
+  <!-- Valores exactos -->
+  <section class="bloque-valores">
+    <details class="valores-exactos">
+      <summary>Ver valores exactos</summary>
+      <table class="tabla-ventanas">
+        <thead>
+          <tr><th>Ventana</th><th>Grupo</th><th>n</th><th>P25</th><th>Mediana</th><th>P75</th></tr>
+        </thead>
+        <tbody id="tabla-comparar-body"></tbody>
+      </table>
+    </details>
+  </section>
+
+</main>
+
+<footer class="pie">CREA · AC SOJA 25-26 · Comparar · MVP interno, no distribuir</footer>
+
+<script type="module" src="js/comparar-app.js"></script>
+</body>
+</html>
