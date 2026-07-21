@@ -234,17 +234,6 @@ a { color: inherit; }
   transform: translateY(-2px);
   box-shadow: 0 6px 16px -12px rgba(17, 24, 39, 0.18);
 }
-.tarjeta-modulo-icono {
-  width: 46px;
-  height: 46px;
-  border-radius: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  background: color-mix(in srgb, var(--color-modulo) 10%, white);
-}
-.tarjeta-modulo-icono svg { width: 23px; height: 23px; stroke: var(--crea-dark); }
 /* Identificador pequeño del módulo (EXPLORAR/COMPARAR/ESCENARIOS) -- ya no
    es el elemento principal de la tarjeta, la pregunta lo es. Queda como
    referencia de a qué pantalla lleva, sin competir con el título. */

@@ -27,6 +27,18 @@
       <button id="comparar-btn" class="link-discreto">+ comparar</button>
     </div>
     <div id="contexto-detalle" class="contexto-detalle"></div>
+
+    <!-- Filtro dinámico Material: último filtro, siempre visible (aunque
+         esté deshabilitado) para no alterar el orden de la interfaz. -->
+    <div class="bloque-material" id="bloque-material">
+      <label for="select-material" class="material-label">Material</label>
+      <select id="select-material" class="material-select">
+        <option value="">Todos los materiales</option>
+      </select>
+      <p id="material-mensaje-vacio" class="material-mensaje" style="display:none;"></p>
+      <p id="material-aviso" class="material-aviso" style="display:none;"></p>
+    </div>
+
     <div id="bloque-comparacion" class="bloque-comparacion"></div>
   </section>
 

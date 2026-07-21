@@ -14,7 +14,7 @@
 // ============================================================================
 
 import { loadDataset } from './data-loader.js';
-import { createAppState } from './state.js';
+import { createAppState, CAMPO_MATERIAL, MIN_OBS_MATERIAL } from './state.js';
 import { renderQuery, abrirBuscadorDeCondiciones, construirOracion, fraseDeCondicion } from './query-builder.js';
 import { createHistory } from './history.js';
 import { createComparison, diferenciasEntreConsultas } from './comparison.js';
@@ -40,6 +40,9 @@ const el = {
   tablaBody: document.getElementById('tabla-ventanas-body'),
   gridKpis: document.getElementById('grid-kpis-explorar'),
   aclaraciones: document.getElementById('aclaraciones-explorar'),
+  selectMaterial: document.getElementById('select-material'),
+  materialMensajeVacio: document.getElementById('material-mensaje-vacio'),
+  materialAviso: document.getElementById('material-aviso'),
 };
 
 init();
@@ -83,6 +86,23 @@ function snapshotDeFiltros(filtros) {
   return JSON.parse(JSON.stringify(filtros, dateReplacer));
 }
 function dateReplacer(_key, value) { return value; }
+
+// ---------------------------------------------------------------------------
+// Filtro dinámico Material -- reutiliza agregarCondicion/quitarCondicion tal
+// cual (mismo mecanismo de historial, comparación y recálculo que cualquier
+// otro filtro). Lo único propio de Material es la presentación (ver
+// renderMaterial más abajo) y la regla de disponibilidad, que ya resuelve
+// state.js.
+// ---------------------------------------------------------------------------
+
+el.selectMaterial.addEventListener('change', () => {
+  const valor = el.selectMaterial.value;
+  if (valor === '') {
+    quitarCondicion(CAMPO_MATERIAL);
+  } else {
+    agregarCondicion(CAMPO_MATERIAL, { type: 'in', values: [valor] });
+  }
+});
 
 // ---------------------------------------------------------------------------
 // Historial (atrás / adelante)
@@ -206,11 +226,19 @@ function render() {
         anchorEl,
         records: snap.filteredData.length > 0 ? snap.filteredData : state.getSnapshot().filteredData,
         onSelect: (key, condition) => agregarCondicion(key, condition),
+        // Orden pedido para Explorar únicamente -- no reordena
+        // FILTERABLE_FIELDS (compartido con Comparar/Escenarios), solo la
+        // lista que ve este buscador puntual.
+        ordenPersonalizado: ['campana', 'zona', 'enso', 'riego', 'fertilizacion', 'ciclo'],
       });
     },
+    // Material tiene su propio selector dedicado (más abajo) -- no debe
+    // aparecer además como pill de la oración con el nombre "genética".
+    clavesExcluidas: [CAMPO_MATERIAL],
   });
 
   renderContexto(snap);
+  renderMaterial(snap);
 
   renderMainChart('grafico-principal', {
     classifiedData: snap.classifiedData,
@@ -227,6 +255,56 @@ function render() {
   renderIndicadoresDestacados(snap);
   renderTablaValoresExactos(snap.visibleWindows);
   actualizarComparacionSiCorresponde();
+}
+
+// ---------------------------------------------------------------------------
+// Filtro dinámico Material -- opciones recalculadas en cada render a partir
+// de snap.materialesElegibles (ya filtrado a n>=MIN_OBS_MATERIAL y ordenado
+// por state.js). Esta función solo pinta: no decide elegibilidad ni corrige
+// selecciones inválidas, eso es responsabilidad exclusiva del motor.
+// ---------------------------------------------------------------------------
+
+function renderMaterial(snap) {
+  const seleccionActual = snap.appliedFilters[CAMPO_MATERIAL]?.values?.[0] || '';
+
+  el.selectMaterial.innerHTML = '';
+  const opcionTodos = document.createElement('option');
+  opcionTodos.value = '';
+  opcionTodos.textContent = 'Todos los materiales';
+  el.selectMaterial.appendChild(opcionTodos);
+
+  snap.materialesElegibles.forEach(({ valor, n }) => {
+    const opt = document.createElement('option');
+    opt.value = valor;
+    opt.textContent = `${valor} (${n.toLocaleString('es-AR')})`;
+    el.selectMaterial.appendChild(opt);
+  });
+
+  el.selectMaterial.value = seleccionActual;
+  el.selectMaterial.disabled = snap.materialesElegibles.length === 0;
+
+  if (snap.materialesElegibles.length === 0) {
+    el.materialMensajeVacio.style.display = '';
+    el.materialMensajeVacio.textContent =
+      `No hay materiales con al menos ${MIN_OBS_MATERIAL} lotes registrados para los filtros seleccionados. Ampliá la selección para habilitar el análisis por material.`;
+  } else {
+    el.materialMensajeVacio.style.display = 'none';
+  }
+
+  // Aviso discreto de un solo uso (Sección 5): snap.materialAvisoRestablecido
+  // ya viene "consumido" desde state.js (getSnapshot() lo apaga apenas se
+  // lee) -- acá solo se muestra si vino en true en ESTE render puntual, y
+  // se reinicia la animación de desvanecido para que sea visible de nuevo
+  // aunque el mensaje anterior ya se hubiera desvanecido.
+  if (snap.materialAvisoRestablecido) {
+    el.materialAviso.textContent = 'La selección de Material se restableció porque quedó con menos de 100 lotes registrados.';
+    el.materialAviso.style.display = '';
+    el.materialAviso.style.animation = 'none';
+    void el.materialAviso.offsetWidth; // fuerza reflow para poder reiniciar la animación
+    el.materialAviso.style.animation = '';
+  } else {
+    el.materialAviso.style.display = 'none';
+  }
 }
 
 function renderContexto(snap) {
@@ -251,6 +329,16 @@ function renderContexto(snap) {
   // #contexto dentro de .fila-contexto) -- no se reubica en cada render,
   // solo se actualiza el contenido de #contexto.
   el.contexto.append(nSpan, repSpan);
+
+  // "Material: [nombre]" -- solo cuando hay un material seleccionado
+  // (nunca con "Todos los materiales", Sección 6 del pedido).
+  const materialSeleccionado = snap.appliedFilters[CAMPO_MATERIAL]?.values?.[0];
+  if (materialSeleccionado) {
+    const materialSpan = document.createElement('span');
+    materialSpan.className = 'contexto-material';
+    materialSpan.textContent = `Material: ${materialSeleccionado}`;
+    el.contexto.appendChild(materialSpan);
+  }
 
   const d = snap.kpis.desgloseConfiabilidad;
   el.contextoDetalle.textContent =

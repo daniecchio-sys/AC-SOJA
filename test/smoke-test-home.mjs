@@ -72,7 +72,7 @@ const etiquetasTarjeta = Array.from(tarjetas).map((t) => t.querySelector('.tarje
 assert(etiquetasTarjeta.includes('🔍 Explorar'), 'La etiqueta pequeña de Explorar está presente');
 assert(etiquetasTarjeta.includes('⚖️ Comparar'), 'La etiqueta pequeña de Comparar está presente');
 assert(etiquetasTarjeta.includes('🧭 Escenarios'), 'La etiqueta pequeña de Escenarios está presente');
-assert(Array.from(tarjetas).every((t) => t.querySelector('.tarjeta-modulo-icono svg') !== null), 'Cada tarjeta tiene un ícono SVG lineal propio');
+assert(Array.from(tarjetas).every((t) => t.querySelector('.tarjeta-modulo-icono') === null), 'Las tarjetas ya NO tienen el ícono superior (eliminado a pedido)');
 const colores = Array.from(tarjetas).map((t) => t.style.getPropertyValue('--color-modulo'));
 assert(new Set(colores).size === 3, 'Las 3 tarjetas usan colores de acento distintos entre sí');
 

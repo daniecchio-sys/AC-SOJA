@@ -17,7 +17,7 @@
 //                           edita a mano, siempre se recalcula a partir de (1)+(2)
 // ============================================================================
 
-import { applyFilters as applyFiltersLogic, createEmptyFilters } from './filters.js';
+import { applyFilters as applyFiltersLogic, createEmptyFilters, contarValoresDistintos } from './filters.js';
 import {
   buildFixedWindows,
   selectVisibleWindows,
@@ -30,6 +30,14 @@ import {
 import { createIdGenerator } from './utils.js';
 
 const nextListenerId = createIdGenerator();
+
+// Filtro dinámico "Material" (Explorar): usa el campo ya existente
+// 'genetica' (columna "Genética" del CSV) -- no es un dato nuevo, solo un
+// control de UI distinto para un campo que ya estaba oculto del buscador
+// genérico. MIN_OBS_MATERIAL es el umbral de evidencia mínima para que un
+// material aparezca como opción elegible.
+export const CAMPO_MATERIAL = 'genetica';
+export const MIN_OBS_MATERIAL = 100;
 
 /**
  * Crea una instancia independiente del estado del explorador. Se usa una
@@ -65,6 +73,8 @@ export function createAppState({ windowBuilder = buildFixedWindows } = {}) {
   let kpis = null;
   let representatividadTemporal = null;
   let messages = [];
+  let materialesElegibles = []; // [{valor, n}], n>=MIN_OBS_MATERIAL, calculado sobre TODOS los filtros activos salvo Material
+  let materialAvisoRestablecido = false; // true solo durante el ciclo de render inmediatamente posterior a un auto-reset (Sección 5)
 
   // ---- suscripciones ----
   const listeners = new Map();
@@ -77,8 +87,32 @@ export function createAppState({ windowBuilder = buildFixedWindows } = {}) {
    * Recalcula TODA la capa derivada a partir de rawRecords + appliedFilters.
    * Es el único lugar del motor donde se encadena el pipeline completo:
    * filtrar -> resumen por ventana -> clasificar -> KPIs -> representatividad temporal -> mensajes.
+   *
+   * Antes de ese pipeline principal, resuelve el filtro dinámico de
+   * Material (Sección 2 y 5 del pedido): calcula qué materiales tienen
+   * evidencia suficiente dentro de TODOS los demás filtros activos (sin
+   * aplicar todavía Material), y si la selección actual dejó de ser
+   * elegible, la corrige ACÁ -- en un solo pase, antes de que el resto del
+   * pipeline use appliedFilters -- para no recalcular dos veces ni arrastrar
+   * una selección inválida al resto de la pantalla.
    */
   function recomputeDerived() {
+    const { [CAMPO_MATERIAL]: condicionMaterial, ...filtrosSinMaterial } = appliedFilters;
+    const subsetSinMaterial = applyFiltersLogic(rawRecords, filtrosSinMaterial);
+    materialesElegibles = contarValoresDistintos(subsetSinMaterial, CAMPO_MATERIAL)
+      .filter((m) => m.n >= MIN_OBS_MATERIAL);
+
+    materialAvisoRestablecido = false;
+    if (condicionMaterial && condicionMaterial.values && condicionMaterial.values.length > 0) {
+      const valorActual = condicionMaterial.values[0];
+      const sigueElegible = materialesElegibles.some((m) => m.valor === valorActual);
+      if (!sigueElegible) {
+        appliedFilters = filtrosSinMaterial; // corrige ANTES de que el resto del pipeline lo use
+        draftFilters = { ...appliedFilters };
+        materialAvisoRestablecido = true;
+      }
+    }
+
     filteredData = applyFiltersLogic(rawRecords, appliedFilters);
     windowSummary = computeWindowSummary(filteredData, windows);
     classifiedData = classifyObservations(filteredData, windows, windowSummary);
@@ -99,6 +133,12 @@ export function createAppState({ windowBuilder = buildFixedWindows } = {}) {
   }
 
   function getSnapshot() {
+    // materialAvisoRestablecido es de UN SOLO USO: se apaga apenas se lee,
+    // para que una relectura del snapshot sin un recompute de por medio
+    // (ej. un segundo render disparado por otra razón) no muestre el aviso
+    // de nuevo -- el aviso debe verse una vez, no quedar "pegado".
+    const avisoEsteRender = materialAvisoRestablecido;
+    materialAvisoRestablecido = false;
     return {
       // capa 1
       windows,
@@ -115,6 +155,8 @@ export function createAppState({ windowBuilder = buildFixedWindows } = {}) {
       kpis,
       representatividadTemporal,
       messages,
+      materialesElegibles,
+      materialAvisoRestablecido: avisoEsteRender,
     };
   }
 

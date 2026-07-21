@@ -169,6 +169,7 @@ body {
   border-bottom: 1px dotted transparent;
 }
 .contexto-representatividad:hover { border-bottom-color: var(--texto-tenue); }
+.contexto-material { font-weight: 500; color: var(--texto); }
 .rep-punto { font-size: 8px; vertical-align: middle; }
 .rep-alta { color: #3f7a4a; }
 .rep-media { color: #a97a1f; }
@@ -908,3 +909,43 @@ table.tabla-ventanas th:first-child, table.tabla-ventanas td:first-child { text-
 
 /* --- Hover sincronizado ranking <-> dispersión (Escenarios) --- */
 .ranking-fila-resaltada { background-color: rgba(0,0,0,0.035); }
+
+/* --- Filtro dinámico Material (Explorar) --- */
+.bloque-material {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.material-label { font-size: 13px; color: var(--texto-suave); font-weight: 500; }
+.material-select {
+  font: inherit;
+  font-size: 13px;
+  color: var(--texto);
+  background: #ffffff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+.material-select:disabled { color: var(--texto-tenue); cursor: not-allowed; background: #f7f7f4; }
+.material-mensaje {
+  flex-basis: 100%;
+  font-size: 12px;
+  color: var(--texto-tenue);
+  font-style: italic;
+  margin: 2px 0 0;
+}
+.material-aviso {
+  flex-basis: 100%;
+  font-size: 12px;
+  color: var(--acento);
+  margin: 2px 0 0;
+  animation: material-aviso-fade 4s ease forwards;
+}
+@keyframes material-aviso-fade {
+  0% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}

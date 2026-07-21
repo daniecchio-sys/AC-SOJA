@@ -134,6 +134,31 @@ export function getDistinctValues(records, fieldKey) {
 }
 
 /**
+ * Cuenta observaciones por valor distinto de un campo categórico, ordenado
+ * por mayor n y, en caso de empate, alfabéticamente. Utilidad genérica (no
+ * específica de "Material") -- getDistinctValues() ya existía para listar
+ * valores sin conteo; esta es la variante con conteo que hacía falta para
+ * el filtro dinámico de Material (Explorar), reutilizable por cualquier
+ * campo 'in' que en el futuro necesite lo mismo.
+ * @param {object[]} records
+ * @param {string} fieldKey
+ * @returns {{valor:string, n:number}[]}
+ */
+export function contarValoresDistintos(records, fieldKey) {
+  const field = FIELD_BY_KEY.get(fieldKey);
+  if (!field || field.type !== 'in') return [];
+  const conteo = new Map();
+  records.forEach((r) => {
+    const v = r[fieldKey];
+    if (v === null || v === undefined) return;
+    conteo.set(v, (conteo.get(v) || 0) + 1);
+  });
+  return Array.from(conteo.entries())
+    .map(([valor, n]) => ({ valor, n }))
+    .sort((a, b) => b.n - a.n || a.valor.localeCompare(b.valor, 'es'));
+}
+
+/**
  * Devuelve el rango [min, max] real presente en los datos para un campo
  * numérico filtrable. Útil para que la interfaz fije los extremos de un
  * control de rango (slider, inputs min/max).

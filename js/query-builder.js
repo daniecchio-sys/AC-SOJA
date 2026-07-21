@@ -130,7 +130,9 @@ function fraseTemporada(condition) {
  */
 export function construirOracion(appliedFilters, opciones = {}) {
   const base = opciones.baseSentence || BASE_SENTENCE_EXPLORAR;
+  const excluidas = opciones.clavesExcluidas || [];
   const claves = Object.keys(appliedFilters).filter((k) => {
+    if (excluidas.includes(k)) return false;
     const c = appliedFilters[k];
     if (!c) return false;
     if (c.type === 'in') return c.values && c.values.length > 0;
@@ -158,8 +160,8 @@ export function construirOracion(appliedFilters, opciones = {}) {
  * @param {(anchorEl:HTMLElement)=>void} params.onRequestAdd
  * @param {string} [params.baseSentence] pregunta raíz propia del módulo -- ver construirOracion(). Si se omite, Explorar/Comparar quedan exactamente igual.
  */
-export function renderQuery(container, { appliedFilters, onRemove, onRequestAdd, baseSentence }) {
-  const { texto, clausulas } = construirOracion(appliedFilters, { baseSentence });
+export function renderQuery(container, { appliedFilters, onRemove, onRequestAdd, baseSentence, clavesExcluidas }) {
+  const { texto, clausulas } = construirOracion(appliedFilters, { baseSentence, clavesExcluidas });
   container.innerHTML = '';
   container.setAttribute('role', 'group');
   container.setAttribute('aria-label', 'Consulta actual');
@@ -226,12 +228,37 @@ export function renderQuery(container, { appliedFilters, onRemove, onRequestAdd,
  *   construirOracion. Sin este parámetro, Explorar y Comparar quedan
  *   exactamente iguales (todas las categorías, comportamiento no tocado).
  */
-export function abrirBuscadorDeCondiciones({ anchorEl, records, onSelect, onClose, categoriasPermitidas }) {
+/**
+ * Abre el buscador de condiciones de dos pasos (categoría → valor).
+ * @param {object} params
+ * @param {HTMLElement} params.anchorEl
+ * @param {Array} params.records
+ * @param {(key:string, condition:object)=>void} params.onSelect
+ * @param {()=>void} [params.onClose]
+ * @param {string[]} [params.categoriasPermitidas] restringe qué categorías
+ *   se ofrecen (ver Escenarios).
+ * @param {string[]} [params.ordenPersonalizado] reordena las categorías
+ *   listadas al frente, en ese orden exacto; las no listadas conservan su
+ *   orden relativo de siempre y quedan después. No modifica
+ *   FILTERABLE_FIELDS (compartido por Explorar/Comparar/Escenarios) --
+ *   reordena solo la lista que ve ESTE llamador puntual. Sin este
+ *   parámetro, el orden queda exactamente igual que siempre.
+ */
+export function abrirBuscadorDeCondiciones({ anchorEl, records, onSelect, onClose, categoriasPermitidas, ordenPersonalizado }) {
   cerrarBuscadorExistente();
 
-  const camposDisponibles = categoriasPermitidas
+  let camposDisponibles = categoriasPermitidas
     ? CAMPOS_BUSCABLES.filter((f) => categoriasPermitidas.includes(f.key))
     : CAMPOS_BUSCABLES;
+
+  if (ordenPersonalizado) {
+    const prioridad = new Map(ordenPersonalizado.map((key, i) => [key, i]));
+    camposDisponibles = [...camposDisponibles].sort((a, b) => {
+      const pa = prioridad.has(a.key) ? prioridad.get(a.key) : ordenPersonalizado.length;
+      const pb = prioridad.has(b.key) ? prioridad.get(b.key) : ordenPersonalizado.length;
+      return pa - pb; // empate (ambos fuera de la lista) conserva el orden relativo original (sort estable)
+    });
+  }
 
   const overlay = document.createElement('div');
   overlay.className = 'buscador-overlay';
